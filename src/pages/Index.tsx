@@ -1,14 +1,16 @@
 import HeroSection from "@/components/HeroSection";
-import WhySection from "@/components/WhySection";
+import InfoCards from "@/components/InfoCards";
 import TransitionSection from "@/components/TransitionSection";
+import WhatHappensNext from "@/components/WhatHappensNext";
 import TrustFooter from "@/components/TrustFooter";
 
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
       <HeroSection />
-      <WhySection />
+      <InfoCards />
       <TransitionSection />
+      <WhatHappensNext />
       <TrustFooter />
     </main>
   );
