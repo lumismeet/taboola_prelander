@@ -1,39 +1,39 @@
-import { MapPin, RefreshCw, Lightbulb } from "lucide-react";
+import { MapPin, RefreshCw, Compass } from "lucide-react";
 
 const reasons = [
   {
     icon: MapPin,
-    text: "Insurance options and availability can vary by location and vehicle",
+    text: "Insurance availability can vary by location and vehicle",
   },
   {
     icon: RefreshCw,
     text: "Coverage needs change over time",
   },
   {
-    icon: Lightbulb,
-    text: "A short review can help clarify what's worth considering",
+    icon: Compass,
+    text: "A short review helps clarify which options are relevant",
   },
 ];
 
 const WhySection = () => {
   return (
-    <section className="px-5 py-12 md:py-16 surface-subtle">
-      <div className="max-w-lg mx-auto w-full">
-        <h2 className="text-2xl md:text-3xl font-bold text-heading mb-8">
+    <section className="px-5 py-10 md:py-12 surface-subtle">
+      <div className="max-w-md mx-auto w-full">
+        <h2 className="text-xl md:text-2xl font-semibold text-heading mb-6">
           Why Drivers Review Their Options
         </h2>
 
-        <ul className="space-y-5">
+        <ul className="space-y-4">
           {reasons.map((reason, index) => (
             <li 
               key={index}
-              className="flex items-start gap-4 animate-fade-in"
+              className="flex items-start gap-3 animate-fade-in"
               style={{ animationDelay: `${0.1 * (index + 1)}s` }}
             >
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <reason.icon className="w-5 h-5 text-primary" />
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-muted flex items-center justify-center mt-0.5">
+                <reason.icon className="w-4 h-4 text-muted-foreground" />
               </div>
-              <p className="text-body text-base md:text-lg leading-relaxed pt-2">
+              <p className="text-body text-base leading-relaxed">
                 {reason.text}
               </p>
             </li>
