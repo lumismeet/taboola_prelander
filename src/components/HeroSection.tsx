@@ -4,10 +4,16 @@ import heroIllustration from "@/assets/hero-illustration.png";
 
 const DESTINATION_URL = "https://auto-savings.com/home.html";
 
+const getCurrentMonth = () => {
+  return new Date().toLocaleString("en-US", { month: "long" });
+};
+
 const HeroSection = () => {
   const handleClick = () => {
     window.location.href = DESTINATION_URL;
   };
+
+  const currentMonth = getCurrentMonth();
 
   return (
     <section className="min-h-[70vh] flex flex-col justify-center px-5 py-10 md:py-14">
@@ -43,6 +49,14 @@ const HeroSection = () => {
             className="w-full max-w-[280px] mx-auto md:mx-0 rounded-lg"
           />
         </div>
+
+        {/* Contextual header */}
+        <p 
+          className="text-sm text-muted-foreground mb-2 animate-fade-in"
+          style={{ animationDelay: "0.12s" }}
+        >
+          Many drivers are rechecking their car insurance options this {currentMonth}
+        </p>
 
         {/* Headline */}
         <h1 
