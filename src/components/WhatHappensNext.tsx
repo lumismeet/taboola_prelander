@@ -44,11 +44,6 @@ const WhatHappensNext = () => {
             </div>
           ))}
         </div>
-
-        {/* Connecting line */}
-        <div className="relative -mt-[52px] mb-8 mx-auto max-w-[200px] md:max-w-[240px]">
-          <div className="h-px bg-border" />
-        </div>
       </div>
     </section>
   );
