@@ -28,7 +28,7 @@ const InfoCards = () => {
   return (
     <section className="px-5 py-10 md:py-12 surface-subtle">
       <div className="max-w-md mx-auto w-full">
-        <h2 className="text-xl md:text-2xl font-semibold text-heading mb-6">
+        <h2 className="text-xl md:text-2xl font-semibold text-heading mb-6 text-center">
           Why Drivers Review Their Options
         </h2>
 

@@ -16,14 +16,14 @@ const HeroSection = () => {
   const currentMonth = getCurrentMonth();
 
   return (
-    <section className="min-h-[70vh] flex flex-col justify-center px-5 py-10 md:py-14">
+    <section className="min-h-[70vh] flex flex-col justify-center px-5 py-10 md:py-14 text-center">
       <div className="max-w-md mx-auto w-full">
         {/* Process indicator */}
         <div 
           className="mb-6 animate-fade-in"
           style={{ animationDelay: "0.05s" }}
         >
-          <div className="flex items-center gap-3 mb-2">
+          <div className="flex items-center justify-center gap-3 mb-2">
             <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
               Step 1 of 2
             </span>
@@ -46,7 +46,7 @@ const HeroSection = () => {
           <img 
             src={heroIllustration} 
             alt="Insurance options review checklist" 
-            className="w-full max-w-[280px] mx-auto md:mx-0 rounded-lg"
+            className="w-full max-w-[280px] mx-auto rounded-lg"
           />
         </div>
 
@@ -89,7 +89,7 @@ const HeroSection = () => {
           </Button>
           
           {/* Micro-copy */}
-          <div className="flex items-center justify-center md:justify-start gap-1.5 mt-3 text-subtle text-sm">
+          <div className="flex items-center justify-center gap-1.5 mt-3 text-subtle text-sm">
             <Clock className="w-3.5 h-3.5" />
             <span>Takes less than a minute</span>
           </div>
