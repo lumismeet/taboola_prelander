@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Clock } from "lucide-react";
 import heroIllustration from "@/assets/hero-illustration.png";
+import { useVisitorTracking } from "@/hooks/useVisitorTracking";
 
 const DESTINATION_URL = "https://auto-savings.com/home.html";
 
@@ -9,7 +10,10 @@ const getCurrentMonth = () => {
 };
 
 const HeroSection = () => {
+  const { trackCtaClick } = useVisitorTracking();
+
   const handleClick = () => {
+    trackCtaClick();
     window.location.href = DESTINATION_URL;
   };
 
