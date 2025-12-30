@@ -23,7 +23,7 @@ const TransitionSection = () => {
           className="w-full md:w-auto group"
         >
           Check Available Options
-          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+          <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
         </Button>
 
         <div className="flex items-center justify-center gap-1.5 mt-3 text-subtle text-sm">
