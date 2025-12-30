@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Shield } from "lucide-react";
+import { Clock } from "lucide-react";
 
 const DESTINATION_URL = "https://auto-savings.com/home.html";
 
@@ -9,36 +9,28 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-[85vh] flex flex-col justify-center px-5 py-12 md:py-16">
-      <div className="max-w-lg mx-auto w-full">
-        {/* Trust indicator */}
-        <div className="flex items-center gap-2 mb-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full trust-badge text-sm font-medium">
-            <Shield className="w-4 h-4" />
-            <span>Secure & Private</span>
-          </div>
-        </div>
-
+    <section className="min-h-[75vh] flex flex-col justify-center px-5 py-10 md:py-14">
+      <div className="max-w-md mx-auto w-full">
         {/* Headline */}
         <h1 
-          className="text-3xl md:text-4xl font-bold text-heading leading-tight mb-4 animate-fade-in"
-          style={{ animationDelay: "0.2s" }}
+          className="text-2xl md:text-3xl font-semibold text-heading leading-snug mb-4 animate-fade-in"
+          style={{ animationDelay: "0.1s" }}
         >
-          Review Available Car Insurance Options in Minutes
+          A Quick Way to Review Available Car Insurance Options
         </h1>
 
         {/* Subheadline */}
         <p 
-          className="text-lg md:text-xl text-body leading-relaxed mb-8 animate-fade-in"
-          style={{ animationDelay: "0.3s" }}
+          className="text-base md:text-lg text-body leading-relaxed mb-8 animate-fade-in"
+          style={{ animationDelay: "0.2s" }}
         >
-          Many drivers take a moment to check which insurance options may fit their situation.
+          Many drivers take a moment to review which insurance options may fit their situation before continuing.
         </p>
 
         {/* Primary CTA */}
         <div 
           className="animate-fade-in"
-          style={{ animationDelay: "0.4s" }}
+          style={{ animationDelay: "0.3s" }}
         >
           <Button 
             variant="cta" 
@@ -48,6 +40,12 @@ const HeroSection = () => {
           >
             Check Available Options
           </Button>
+          
+          {/* Micro-copy */}
+          <div className="flex items-center justify-center md:justify-start gap-1.5 mt-3 text-subtle text-sm">
+            <Clock className="w-3.5 h-3.5" />
+            <span>Takes less than a minute</span>
+          </div>
         </div>
       </div>
     </section>
