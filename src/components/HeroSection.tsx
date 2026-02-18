@@ -198,7 +198,7 @@ const HeroSection = () => {
 </section>
 
         {/* TWO IMAGES */}
-        <div className="grid md:grid-cols-2 gap-6 mb-1">
+        <div className="grid md:grid-cols-2 gap-6 mb-1 mt-7">
           <img
             src={img1}
             className="w-full h-[250px] object-cover"
