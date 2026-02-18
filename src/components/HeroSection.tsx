@@ -4,6 +4,8 @@ import heroIllustration from "@/assets/hero-illustration.png";
 import { useVisitorTracking } from "@/hooks/useVisitorTracking";
 import logoo from "../assets//logoauto.png"
 import hero from "../assets/car-lady1.png"
+import img1 from "../assets/car_shocked.png"
+import img2 from "../assets/happy_family.jpg"
 
 const DESTINATION_URL = "https://auto-savings.com/home.html";
 
@@ -33,7 +35,7 @@ const HeroSection = () => {
     //         <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
     //           Step 1 of 2
     //         </span>
-    //         <span className="text-xs text-subtle">—</span>
+    //         <span className="text-xs text-subtle">-</span>
     //         <span className="text-xs text-subtle">Review Available Options</span>
     //       </div>
     //       <div className="h-1 bg-muted rounded-full overflow-hidden">
@@ -168,7 +170,7 @@ const HeroSection = () => {
           </p>
 
           <p className="text-slate-600 leading-relaxed">
-            The average American family still overspends by $416 or more per year on car insurance — often without realizing it.
+            The average American family still overspends by $416 or more per year on car insurance - often without realizing it.
             A free comparison tool lets you check rates from trusted insurers in your area in just minutes.
           </p>
         </section>
@@ -176,11 +178,11 @@ const HeroSection = () => {
         {/* TWO IMAGES */}
         <div className="grid md:grid-cols-2 gap-6 mb-12">
           <img
-            src="/car-finance.avif"
+            src={img1}
             className="w-full h-[250px] object-cover"
           />
           <img
-            src="/carinsurance1.avif"
+            src={img2}
             className="w-full h-[250px] object-cover"
           />
         </div>
@@ -229,7 +231,7 @@ const HeroSection = () => {
           </ul>
 
           <p className="text-slate-600">
-            There’s no obligation to switch — you’re simply reviewing what’s available in your area.
+            There’s no obligation to switch - you’re simply reviewing what’s available in your area.
           </p>
         </section>
 
