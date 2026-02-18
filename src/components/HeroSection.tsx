@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Clock } from "lucide-react";
 import heroIllustration from "@/assets/hero-illustration.png";
 import { useVisitorTracking } from "@/hooks/useVisitorTracking";
+import logoo from "../assets/hero-illustration.png"
+import hero from "../assets/car-lady1.png"
 
 const DESTINATION_URL = "https://auto-savings.com/home.html";
 
@@ -106,7 +108,7 @@ const HeroSection = () => {
       <div className="sticky top-0 z-50 bg-white shadow-md">
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
           <img
-            src="/logo.png"
+            src={logoo}
             alt="Logo"
             className="w-12 h-12 object-contain"
           />
@@ -143,7 +145,7 @@ const HeroSection = () => {
 
         {/* LARGE IMAGE */}
         <img
-          src="/car-lady1.png"
+          src={hero}
           alt="Car Insurance"
           className="w-full h-[350px] object-cover mb-10"
         />
