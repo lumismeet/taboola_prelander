@@ -28,7 +28,7 @@ const TransitionSection = () => {
 
         <div className="flex items-center justify-center gap-1.5 mt-3 text-subtle text-sm">
           <Clock className="w-3.5 h-3.5" />
-          <span>Takes less than a minute</span>
+          <span>Takes less than a minute!</span>
         </div>
       </div>
     </section>
