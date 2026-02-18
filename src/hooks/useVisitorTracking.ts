@@ -15,23 +15,39 @@ const getOrCreateVisitorId = (): string => {
 export const useVisitorTracking = () => {
   const visitorId = getOrCreateVisitorId();
 
-  const trackEvent = useCallback(async (eventType: 'page_view' | 'cta_click') => {
-    try {
-      const { error } = await supabase.from('visitor_events').insert({
-        visitor_id: visitorId,
-        event_type: eventType,
-        page_url: window.location.href,
-        referrer: document.referrer || null,
-        user_agent: navigator.userAgent,
-      });
+  const trackEvent = useCallback(
+    async (eventType: "page_view" | "cta_click") => {
+      try {
+        const response = await fetch(
+          "https://dfkdpevscwylkzllxupx.supabase.co/functions/v1/track-events",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+              "apikey": import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+            },
+            body: JSON.stringify({
+              visitor_id: visitorId,
+              event_type: eventType,
+              page_url: window.location.href,
+              referrer: document.referrer || null,
+              user_agent: navigator.userAgent,
+            }),
+          }
+        );
 
-      if (error) {
-        console.error('Error tracking event:', error);
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error("Tracking API error:", errorData);
+        }
+      } catch (err) {
+        console.error("Failed to track event:", err);
       }
-    } catch (err) {
-      console.error('Failed to track event:', err);
-    }
-  }, [visitorId]);
+    },
+    [visitorId]
+  );
+
 
   const trackPageView = useCallback(() => {
     trackEvent('page_view');

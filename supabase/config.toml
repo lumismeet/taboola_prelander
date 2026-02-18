@@ -1,1 +1,2 @@
-project_id = "ohjfdoigqbaqreieoysl"
+[functions.track-events]
+verify_jwt = false
