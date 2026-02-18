@@ -4,8 +4,8 @@ import heroIllustration from "@/assets/hero-illustration.png";
 import { useVisitorTracking } from "@/hooks/useVisitorTracking";
 import logoo from "../assets//logoauto.png"
 import hero from "../assets/car-lady1.png"
-// import img1 from "../assets/car_shocked.png"
-import img1 from "../assets/money_policy.png"
+import img1 from "../assets/car_lady1.png"
+// import img1 from "../assets/money_policy.png"
 import img2 from "../assets/happy_family.png"
 
 const DESTINATION_URL = "https://auto-savings.com/home.html";
