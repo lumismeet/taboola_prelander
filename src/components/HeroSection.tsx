@@ -155,11 +155,11 @@ const HeroSection = () => {
         <img
           src={hero}
           alt="Car Insurance"
-          className="w-full h-[350px] object-cover mb-10"
+          className="w-full h-[350px] object-cover"
         />
 
         {/* TEXT SECTION */}
-        <section className="space-y-6 mb-12">
+        <section className="space-y-6">
           <h3 className="text-xl font-bold">
             Find the right car insurance rate and drive stress-free!
           </h3>
