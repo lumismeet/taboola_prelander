@@ -193,7 +193,7 @@ const HeroSection = () => {
   </p>
 
   <p className="text-slate-600 leading-relaxed">
-    Checking rates online is free and does not require you to make any immediate changes. It simply gives you visibility into what is available in your area so you can choose what fits your needs and your budget.
+    Checking rates online is free and does not require you to make any immediate changes. It simply gives you visibility into what is available in your area so you can choose what fits your needs and your budget by clicking on <a href="https://auto-savings.com/home.html" className="text-blue-600 underline">Auto Savings</a>
   </p>
 </section>
 
@@ -263,7 +263,7 @@ const HeroSection = () => {
     <p>No long phone calls.</p>
     <p>No pressure to switch.</p>
     <p>No obligation to purchase anything.</p>
-    <p>Just a fast and simple way to see what is currently available near you.</p>
+    <p>Just a fast and simple way to see what is currently available near you. Click here <a href="https://auto-savings.com/home.html" className="text-blue-600 underline">Auto Savings</a> to get the best deals!</p>
   </div>
 </section>
 
@@ -316,7 +316,7 @@ const HeroSection = () => {
   </ul>
 
   <p className="text-slate-600">
-    There is no obligation to switch providers. You are simply gathering information so you can make a confident decision when your renewal date approaches.
+    There is no obligation to switch providers. To be more informed visit <a href="https://auto-savings.com/home.html" className="text-blue-600 underline">Auto Savings</a> today. You are simply gathering information so you can make a confident decision when your renewal date approaches.
   </p>
 </section>
 
