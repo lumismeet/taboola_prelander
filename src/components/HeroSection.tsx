@@ -159,7 +159,7 @@ const HeroSection = () => {
         />
 
         {/* TEXT SECTION */}
-        <section className="space-y-6">
+        {/* <section className="space-y-6">
           <h3 className="text-xl font-bold">
             Find the right car insurance rate and drive stress-free!
           </h3>
@@ -173,7 +173,28 @@ const HeroSection = () => {
             The average American family still overspends by $416 or more per year on car insurance - often without realizing it.
             A free comparison tool lets you check rates from trusted insurers in your area in just minutes.
           </p>
-        </section>
+        </section> */}
+        <section className="space-y-6">
+  <h3 className="text-xl font-bold">
+    Find the right car insurance rate and drive with confidence
+  </h3>
+
+  <p className="text-slate-600 leading-relaxed">
+    Insurance pricing changes more often than many people realize. Factors such as driving data, claim trends, repair costs, and regional statistics can influence what you are quoted at renewal.
+  </p>
+
+  <p className="text-slate-600 leading-relaxed">
+    What felt like a competitive rate twelve months ago may not reflect current market pricing. That is why more drivers are taking just a few minutes to review their options before committing to another policy term.
+  </p>
+
+  <p className="text-slate-600 leading-relaxed">
+    Studies show that many households continue paying higher premiums simply because they have not compared rates recently. A quick comparison could reveal lower pricing for similar coverage, helping you better manage your monthly budget.
+  </p>
+
+  <p className="text-slate-600 leading-relaxed">
+    Checking rates online is free and does not require you to make any immediate changes. It simply gives you visibility into what is available in your area so you can choose what fits your needs and your budget.
+  </p>
+</section>
 
         {/* TWO IMAGES */}
         <div className="grid md:grid-cols-2 gap-6 mb-1">
@@ -188,7 +209,7 @@ const HeroSection = () => {
         </div>
 
         {/* HOW IT WORKS */}
-        <section className="space-y-3 mb-12">
+        {/* <section className="space-y-3 mb-12">
           <h3 className="text-xl font-bold">
             Balance your budget and check rates now.
           </h3>
@@ -210,10 +231,43 @@ const HeroSection = () => {
             <p>No pressure.</p>
             <p>Just a quick look at what's available in your zip code.</p>
           </div>
-        </section>
+        </section> */}
+        {/* HOW IT WORKS */}
+<section className="space-y-4 mb-16">
+  <h3 className="text-xl font-bold">
+    Balance your budget and check rates now.
+  </h3>
+
+  <p className="text-slate-600">
+    Getting started only takes a moment. You are simply reviewing available options in your area to see if you could be paying less.
+  </p>
+
+  <p className="text-slate-600">
+    The process is designed to be simple, straightforward, and completely online. No complicated paperwork and no long conversations.
+  </p>
+
+  <p className="text-slate-600 font-semibold">
+    Here is how it works:
+  </p>
+
+  <ul className="list-disc pl-6 text-slate-600 space-y-2">
+    <li>Click below to begin your free rate check</li>
+    <li>Enter your ZIP code and answer a few quick questions about your vehicle</li>
+    <li>Instantly compare available offers from insurers in your area</li>
+  </ul>
+
+  <p className="font-semibold">That is all there is to it.</p>
+
+  <div className="text-slate-600 space-y-1">
+    <p>No long phone calls.</p>
+    <p>No pressure to switch.</p>
+    <p>No obligation to purchase anything.</p>
+    <p>Just a fast and simple way to see what is currently available near you.</p>
+  </div>
+</section>
 
         {/* WHY IT MATTERS */}
-        <section className="space-y-6 mb-16">
+        {/* <section className="space-y-6 mb-16">
           <h3 className="text-xl font-bold">Why Comparing Rates Matters</h3>
 
           <p className="text-slate-600">
@@ -233,7 +287,37 @@ const HeroSection = () => {
           <p className="text-slate-600">
             There's no obligation to switch - you're simply reviewing what's available in your area.
           </p>
-        </section>
+        </section> */}
+        {/* WHY IT MATTERS */}
+<section className="space-y-6 mb-16">
+  <h3 className="text-xl font-bold">Why Comparing Rates Matters</h3>
+
+  <p className="text-slate-600">
+    Many drivers remain with the same insurance provider for years without checking whether their rate is still competitive. It is easy to set a policy on auto renewal and forget about it.
+  </p>
+
+  <p className="text-slate-600">
+    However, insurance companies frequently adjust pricing based on market conditions, driving data, location trends, and other risk factors. A policy that was affordable last year may not be the most cost effective option today.
+  </p>
+
+  <p className="text-slate-600">
+    Even small monthly differences can add up over time. Saving twenty or thirty dollars per month could mean hundreds of dollars kept in your pocket each year.
+  </p>
+
+  <p className="text-slate-600 font-semibold">
+    Reviewing your options only takes a few simple steps:
+  </p>
+
+  <ul className="list-disc pl-6 text-slate-600 space-y-2">
+    <li>Enter your ZIP code to see what insurers are available near you</li>
+    <li>Answer a few basic questions about your vehicle and driving history</li>
+    <li>View available offers side by side to compare coverage and pricing</li>
+  </ul>
+
+  <p className="text-slate-600">
+    There is no obligation to switch providers. You are simply gathering information so you can make a confident decision when your renewal date approaches.
+  </p>
+</section>
 
         {/* TESTIMONIALS */}
         <section className="text-center mb-16">
