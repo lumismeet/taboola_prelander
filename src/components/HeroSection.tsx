@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Clock } from "lucide-react";
 import heroIllustration from "@/assets/hero-illustration.png";
 import { useVisitorTracking } from "@/hooks/useVisitorTracking";
-import logoo from "../assets/hero-illustration.png"
+import logoo from "../assets//logoauto.png"
 import hero from "../assets/car-lady1.png"
 
 const DESTINATION_URL = "https://auto-savings.com/home.html";
@@ -106,20 +106,26 @@ const HeroSection = () => {
 
       {/* NAVBAR */}
       <div className="sticky top-0 z-50 bg-white shadow-md">
-        <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="mx-10 px-6 py-4 flex items-center justify-center md:justify-between">
+
+          {/* Logo */}
           <img
             src={logoo}
             alt="Logo"
-            className="w-12 h-12 object-contain"
+            className="h-10"
           />
+
+          {/* Button (hidden on tablet & mobile) */}
           <button
             onClick={handleClick}
-            className="bg-sky-400 hover:bg-sky-500 text-white font-semibold px-6 py-2 rounded-full transition cursor-pointer"
+            className="hidden md:block bg-sky-400 hover:bg-sky-500 text-white font-semibold px-6 py-2 rounded-full transition cursor-pointer"
           >
             Learn How
           </button>
+
         </div>
       </div>
+
 
       <div className="max-w-3xl mx-auto px-6">
 
@@ -134,7 +140,7 @@ const HeroSection = () => {
           </h2>
 
           <p className="text-sm text-slate-500 mb-6">
-            Author • {new Date().toLocaleDateString()}
+            CheckAutoPlans • {new Date().toLocaleDateString()}
           </p>
 
           <p className="text-slate-600 max-w-2xl mx-auto">
