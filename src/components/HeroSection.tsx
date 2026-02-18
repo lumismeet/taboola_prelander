@@ -176,7 +176,7 @@ const HeroSection = () => {
         </section>
 
         {/* TWO IMAGES */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 gap-6 mb-1">
           <img
             src={img1}
             className="w-full h-[250px] object-cover"
@@ -188,7 +188,7 @@ const HeroSection = () => {
         </div>
 
         {/* HOW IT WORKS */}
-        <section className="space-y-6 mb-12">
+        <section className="space-y-3 mb-12">
           <h3 className="text-xl font-bold">
             Balance your budget and check rates now.
           </h3>
@@ -205,7 +205,7 @@ const HeroSection = () => {
 
           <p className="font-semibold">That's it.</p>
 
-          <div className="space-y-2 text-slate-600">
+          <div className=" text-slate-600">
             <p>No long phone calls.</p>
             <p>No pressure.</p>
             <p>Just a quick look at what's available in your zip code.</p>
@@ -224,14 +224,14 @@ const HeroSection = () => {
             Insurance companies adjust pricing frequently. A policy that was affordable a year ago may not be the best option today.
           </p>
 
-          <ul className="list-disc pl-6 text-slate-600 space-y-2">
+          <ul className="list-disc text-slate-600 ">
             <li>Enter your ZIP code</li>
             <li>Answer a few basic questions</li>
             <li>View available offers side by side</li>
           </ul>
 
           <p className="text-slate-600">
-            There’s no obligation to switch - you’re simply reviewing what’s available in your area.
+            There's no obligation to switch - you're simply reviewing what's available in your area.
           </p>
         </section>
 
@@ -240,17 +240,36 @@ const HeroSection = () => {
           <h2 className="text-2xl font-bold mb-10">Testimonials</h2>
 
           <div className="grid md:grid-cols-3 gap-6 text-left">
-            {[1, 2, 3].map((i) => (
+            {[
+              {
+                text: "I was honestly expecting this to be one of those long, complicated forms. It took me less than 3 minutes and I ended up switching the same day.",
+                name: "Daniel R.",
+                location: "Austin, TX"
+              },
+              {
+                text: "My renewal quote went up almost $40 a month. I checked here just to compare and found a better rate almost immediately.",
+                name: "Melissa T.",
+                location: "Phoenix, AZ"
+              },
+              {
+                text: "Super simple process. No spam calls, no pressure. Just clear options and better pricing than what I was paying.",
+                name: "James L.",
+                location: "Orlando, FL"
+              }
+            ].map((item, i) => (
               <div key={i} className="bg-white shadow-md p-6">
                 <p className="text-slate-600 text-sm mb-4">
-                  “I checked rates and was surprised at how much I could save.
-                  It only took a few minutes.”
+                  “{item.text}”
                 </p>
-                <div className="font-semibold text-sm">Verified User</div>
+                <div className="font-semibold text-sm">
+                  {item.name}
+                  <span className="text-slate-500 font-normal"> — {item.location}</span>
+                </div>
               </div>
             ))}
           </div>
         </section>
+
 
         {/* FINAL CTA */}
         <div className="text-center mb-20">
