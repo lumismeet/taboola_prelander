@@ -268,7 +268,7 @@ const HeroSection = () => {
             <a href="#" className="hover:underline">Contact</a>
           </div>
 
-          <p>© 2026 Auto Savings. All rights reserved.</p>
+          <p>© 2026 Check Auto Plans. All rights reserved.</p>
         </div>
       </footer>
 
