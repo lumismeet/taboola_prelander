@@ -78,7 +78,7 @@ useEffect(() => {
       onClick={handleClick}
       className="hidden md:block bg-sky-400 hover:bg-sky-500 text-white font-semibold px-6 py-2 rounded-full transition cursor-pointer"
     >
-      Check My Rate — Free →
+      Check Rates for free!
     </button>
   </div>
 </div>
@@ -109,11 +109,11 @@ useEffect(() => {
         {/* TOP TESTIMONIAL */}
 <div className="bg-white border-l-4 border-sky-400 shadow-sm rounded-r-xl px-6 py-4 mb-8 text-left">
   <p className="text-slate-700 text-sm leading-relaxed mb-2">
-    "My renewal jumped $47 a month. I took 2 minutes to compare on here and switched that same afternoon.
-    Saved over $500 for the year."
+    "My renewal jumped $47 a month. I took just about 2 minutes to compare on here and switched that same afternoon. 
+    I seriously saved over $500 for the year!"
   </p>
   <p className="text-sm font-semibold text-slate-800">
-    Melissa T. <span className="text-slate-400 font-normal">— Phoenix, AZ</span>
+    Melissa Tanner <span className="text-slate-400 font-normal">— Phoenix, AZ</span>
   </p>
 </div>
 
@@ -124,22 +124,7 @@ useEffect(() => {
           className="w-full h-[350px] object-cover"
         />
 
-        {/* TEXT SECTION */}
-        {/* <section className="space-y-6">
-          <h3 className="text-xl font-bold">
-            Find the right car insurance rate and drive stress-free!
-          </h3>
-
-          <p className="text-slate-600 leading-relaxed">
-            Insurance companies adjust pricing constantly. What was a good deal 12 months ago may not be the best option today.
-            That's why more drivers are taking 2 minutes to compare offers online before their next renewal.
-          </p>
-
-          <p className="text-slate-600 leading-relaxed">
-            The average American family still overspends by $416 or more per year on car insurance - often without realizing it.
-            A free comparison tool lets you check rates from trusted insurers in your area in just minutes.
-          </p>
-        </section> */}
+       
         <section className="space-y-6">
           <h3 className="text-xl font-bold">
             Find the right car insurance rate and drive with confidence
@@ -292,18 +277,18 @@ useEffect(() => {
           <div className="grid md:grid-cols-3 gap-6 text-left">
             {[
               {
-                text: "I was honestly expecting this to be one of those long, complicated forms. It took me less than 3 minutes and I ended up switching the same day.",
-                name: "Daniel R.",
+                text: "I was honestly expecting this to be one of those long, complicated forms. It took me less than 3 minutes and I ended up switching the same day. Just loved it",
+                name: "Daniel Ross",
                 location: "Austin, TX"
               },
               {
-                text: "My renewal quote went up almost $40 a month. I checked here just to compare and found a better rate almost immediately.",
-                name: "Melissa T.",
+                text: "My renewal jumped $47 a month. I took just about 2 minutes to compare on here and switched that same afternoon. I seriously saved over $500 for the year!",
+                name: "Melissa Tanner",
                 location: "Phoenix, AZ"
               },
               {
                 text: "Super simple process. No spam calls, no pressure. Just clear options and better pricing than what I was paying.",
-                name: "James L.",
+                name: "James Lenning",
                 location: "Orlando, FL"
               }
             ].map((item, i) => (
@@ -336,7 +321,7 @@ useEffect(() => {
     onClick={handleClick}
     className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-10 py-4 rounded-full text-lg transition cursor-pointer shadow-lg"
   >
-    Check My Rate — Free, No Obligation →
+    Check My Rate - Free, No Obligation →
   </button>
   <p className="text-slate-400 text-sm mt-3">
     Takes 90 seconds • No phone calls • No spam
