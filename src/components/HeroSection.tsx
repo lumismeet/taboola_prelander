@@ -7,6 +7,7 @@ import hero from "../assets/car-lady1.png"
 import img1 from "../assets/car_shocked.png"
 // import img1 from "../assets/money_policy.png"
 import img2 from "../assets/happy_family.png"
+import { useState, useEffect } from "react";
 
 const DESTINATION_URL = "https://auto-savings.com/home.html";
 
@@ -15,7 +16,17 @@ const getCurrentMonth = () => {
 };
 
 const HeroSection = () => {
+  // const { trackCtaClick } = useVisitorTracking();
   const { trackCtaClick } = useVisitorTracking();
+const [stateName, setStateName] = useState("");
+const [visitorCount] = useState(() => Math.floor(Math.random() * 300) + 600); // e.g. 847
+
+useEffect(() => {
+  fetch("https://ipapi.co/json/")
+    .then((r) => r.json())
+    .then((d) => setStateName(d.region || ""))
+    .catch(() => {}); // fail silently
+}, []);
 
   const handleClick = () => {
     trackCtaClick();
@@ -29,17 +40,17 @@ const HeroSection = () => {
     <div className="bg-gray-100 text-slate-800">
 
       {/* NAVBAR */}
-      <div className="sticky top-0 z-50 bg-white shadow-md">
+      {/* <div className="sticky top-0 z-50 bg-white shadow-md">
         <div className="mx-10 px-6 py-4 flex items-center justify-center md:justify-between">
 
-          {/* Logo */}
+          
           <img
             src={logoo}
             alt="Logo"
             className="h-10"
           />
 
-          {/* Button (hidden on tablet & mobile) */}
+          
           <button
             onClick={handleClick}
             className="hidden md:block bg-sky-400 hover:bg-sky-500 text-white font-semibold px-6 py-2 rounded-full transition cursor-pointer"
@@ -48,7 +59,29 @@ const HeroSection = () => {
           </button>
 
         </div>
+      </div> */}
+
+      {/* URGENCY BAR */}
+      <div className="bg-amber-400 text-slate-900 text-center text-sm font-semibold py-2 px-4 sticky top-0 z-50">
+        ⚠️ Rates in {stateName || "your area"} were updated today —{" "}
+        {visitorCount} drivers checked this week.{" "}
+        <span className="underline cursor-pointer" onClick={handleClick}>
+          Check yours now →
+        </span>
       </div>
+
+{/* NAVBAR */}
+<div className="sticky top-8 z-40 bg-white shadow-md">
+  <div className="mx-10 px-6 py-4 flex items-center justify-center md:justify-between">
+    <img src={logoo} alt="Logo" className="h-10" />
+    <button
+      onClick={handleClick}
+      className="hidden md:block bg-sky-400 hover:bg-sky-500 text-white font-semibold px-6 py-2 rounded-full transition cursor-pointer"
+    >
+      Check My Rate — Free →
+    </button>
+  </div>
+</div>
 
 
       <div className="max-w-3xl mx-auto px-6">
@@ -72,6 +105,17 @@ const HeroSection = () => {
             simply because they never compare rates.
           </p>
         </section>
+
+        {/* TOP TESTIMONIAL */}
+<div className="bg-white border-l-4 border-sky-400 shadow-sm rounded-r-xl px-6 py-4 mb-8 text-left">
+  <p className="text-slate-700 text-sm leading-relaxed mb-2">
+    "My renewal jumped $47 a month. I took 2 minutes to compare on here and switched that same afternoon.
+    Saved over $500 for the year."
+  </p>
+  <p className="text-sm font-semibold text-slate-800">
+    Melissa T. <span className="text-slate-400 font-normal">— Phoenix, AZ</span>
+  </p>
+</div>
 
         {/* LARGE IMAGE */}
         <img
@@ -278,19 +322,31 @@ const HeroSection = () => {
 
 
         {/* FINAL CTA */}
-        <div className="text-center mb-20">
+        {/* <div className="text-center mb-20">
           <button
             onClick={handleClick}
             className="bg-sky-400 hover:bg-sky-500 text-white font-semibold px-8 py-3 rounded-full transition cursor-pointer"
           >
             Learn How
           </button>
-        </div>
+        </div> */}
+        {/* FINAL CTA */}
+<div className="text-center mb-20">
+  <button
+    onClick={handleClick}
+    className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-10 py-4 rounded-full text-lg transition cursor-pointer shadow-lg"
+  >
+    Check My Rate — Free, No Obligation →
+  </button>
+  <p className="text-slate-400 text-sm mt-3">
+    Takes 90 seconds • No phone calls • No spam
+  </p>
+</div>
 
       </div>
 
       {/* FOOTER */}
-      <footer className="bg-white border-t py-10 text-center text-sm text-slate-500">
+      {/* <footer className="bg-white border-t py-10 text-center text-sm text-slate-500">
         <div className="max-w-3xl mx-auto px-6 space-y-6">
           <p>
             This website is an informational resource. We are not an insurance provider or agency.
@@ -305,7 +361,109 @@ const HeroSection = () => {
 
           <p>© 2026 Check Auto Plans. All rights reserved.</p>
         </div>
-      </footer>
+      </footer> */}
+      {/* FOOTER */}
+<footer className="bg-gray-900 text-gray-300 pt-14 pb-6 mt-0">
+  <div className="max-w-6xl mx-auto px-8">
+    
+    {/* TOP ROW */}
+    <div className="flex flex-col md:flex-row justify-between gap-10 mb-10">
+      
+      {/* LEFT — Logo + tagline + address + badges */}
+      <div className="flex flex-col gap-4 max-w-xs">
+        <img src={logoo} alt="CheckAutoPlans Logo" className="h-10 w-fit" />
+        <p className="text-gray-400 text-sm leading-relaxed">
+          Make the right moves for{" "}
+          <span className="text-sky-400 font-semibold">your savings.</span>
+        </p>
+        <p className="text-gray-500 text-xs">
+          1343 Main St Suite 705 · Sarasota FL 34236
+        </p>
+        {/* Trust badges */}
+        <div className="flex items-center gap-3 mt-1">
+          <div className="bg-white rounded px-2 py-1 flex items-center gap-1">
+            <span className="text-blue-800 font-black text-xs">BBB</span>
+            <div className="text-[9px] text-blue-800 leading-tight font-semibold">
+              ACCREDITED<br />BUSINESS
+            </div>
+          </div>
+          <a href="#" className="bg-gray-700 hover:bg-gray-600 rounded p-2 transition">
+            <svg className="w-5 h-5 text-white fill-current" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <a href="#" className="bg-gray-700 hover:bg-gray-600 rounded p-2 transition">
+            <svg className="w-5 h-5 text-white fill-current" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      {/* RIGHT — Nav columns */}
+      <div className="flex flex-wrap gap-10 text-sm">
+        
+        <div>
+          <h4 className="text-sky-400 font-semibold mb-3 tracking-wide">Insurance Products</h4>
+          <ul className="space-y-2 text-gray-300">
+            <li><a href={DESTINATION_URL} className="hover:text-white transition">Car Insurance</a></li>
+            <li><a href="#" className="hover:text-white transition">Home Insurance</a></li>
+            <li><a href="#" className="hover:text-white transition">Life Insurance</a></li>
+            <li><a href="#" className="hover:text-white transition">Health Insurance</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-sky-400 font-semibold mb-3 tracking-wide">Resources</h4>
+          <ul className="space-y-2 text-gray-300">
+            <li><a href="#" className="hover:text-white transition">How It Works</a></li>
+            <li><a href="#" className="hover:text-white transition">Rate Calculator</a></li>
+            <li><a href="#" className="hover:text-white transition">Coverage Guide</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-sky-400 font-semibold mb-3 tracking-wide">Contact Us</h4>
+          <ul className="space-y-2 text-gray-300">
+            <li><a href="#" className="hover:text-white transition">Facebook</a></li>
+            <li><a href="#" className="hover:text-white transition">Twitter / X</a></li>
+            <li><a href="mailto:support@checkautoplans.com" className="hover:text-white transition">Email</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    {/* DIVIDER */}
+    <div className="border-t border-gray-700 mb-6" />
+
+    {/* DISCLAIMER */}
+    <p className="text-gray-500 text-xs leading-relaxed mb-6">
+      CheckAutoPlans.com is an independent, advertising-supported comparison website. The products 
+      and offers that appear on this website are from third-party insurance partners and advertisers 
+      from which CheckAutoPlans.com may receive compensation. This compensation may influence which 
+      products we feature, how they are presented, and where they appear on the page. 
+      CheckAutoPlans.com is not a licensed insurance provider or broker. Content on this site is 
+      provided for informational purposes only and does not constitute insurance advice. Available 
+      rates and offers vary by location, driving history, and other factors and are subject to 
+      change without notice. Not all products or offers are available in all states.
+    </p>
+
+    {/* DIVIDER */}
+    <div className="border-t border-gray-700 mb-6" />
+
+    {/* BOTTOM BAR */}
+    <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-gray-500">
+      <p>© {new Date().getFullYear()} Check Auto Plans. All rights reserved.</p>
+      <div className="flex gap-6">
+        <a href="#" className="hover:text-white transition">Privacy Policy</a>
+        <a href="#" className="hover:text-white transition">Terms of Service</a>
+        <a href="#" className="hover:text-white transition">Contact</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
 
     </div>
 
