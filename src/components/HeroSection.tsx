@@ -307,7 +307,7 @@ useEffect(() => {
                 </p>
                 <div className="font-semibold text-sm">
                   {item.name}
-                  <span className="text-slate-500 font-normal"> — {item.location}</span>
+                  <span className="text-slate-500 font-normal"> - {item.location}</span>
                 </div>
               </div>
             ))}
