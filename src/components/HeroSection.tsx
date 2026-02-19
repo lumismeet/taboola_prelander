@@ -75,7 +75,7 @@ const HeroSection = () => {
 
         {/* LARGE IMAGE */}
         <img
-          src={hero}
+          src={img1}
           alt="Car Insurance"
           className="w-full h-[350px] object-cover"
         />
@@ -121,7 +121,7 @@ const HeroSection = () => {
         {/* TWO IMAGES */}
         <div className="grid md:grid-cols-2 gap-6 mb-1 mt-7">
           <img
-            src={img1}
+            src={hero}
             className="w-full h-[250px] object-cover"
           />
           <img
