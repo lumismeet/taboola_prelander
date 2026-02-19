@@ -105,18 +105,18 @@ useEffect(() => {
             simply because they never compare rates.
           </p>
 
-          <div className="bg-white shadow-md rounded p-4 my-6 inline-block">
+          {/* <div className="bg-white shadow-md rounded p-4 my-6 inline-block">
   <p className="font-semibold text-slate-800">
     “Average drivers saved $420 last month using Auto Savings!”
   </p>
-</div>
+</div> */}
 
 
 
         </section>
 
-        {/* TOP TESTIMONIAL */}
-{/* <div className="bg-white border-l-4 border-sky-400 shadow-sm rounded-r-xl px-6 py-4 mb-8 text-left">
+       
+<div className="bg-white border-l-4 border-sky-400 shadow-sm rounded-r-xl px-6 py-4 mb-8 text-left">
   <p className="text-slate-700 text-sm leading-relaxed mb-2">
     "My renewal jumped $47 a month. I took just about 2 minutes to compare on here and switched that same afternoon. 
     I seriously saved over $500 for the year!"
@@ -124,7 +124,7 @@ useEffect(() => {
   <p className="text-sm font-semibold text-slate-800">
     Melissa Tanner <span className="text-slate-400 font-normal">— Phoenix, AZ</span>
   </p>
-</div> */}
+</div>
 
         {/* LARGE IMAGE */}
         <img
