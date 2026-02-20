@@ -19,10 +19,18 @@ export default function USMap() {
           {hovered}
         </div>
       )}
+      <>
+      <style>{`
+    .us-map path:hover {
+      fill: #9333ea;
+    }
+  `}</style>
+      </>
 
       <svg
         viewBox="0 0 959 593"
         className="
+         us-map
           w-full max-w-5xl
           [&>path]:fill-gray-200
           [&>path]:stroke-white
@@ -30,7 +38,7 @@ export default function USMap() {
           [&>path]:transition
           [&>path]:duration-200
           [&>path]:cursor-pointer
-          [&>path]:hover:fill-purple-600
+         
         "
         onMouseMove={(e) => {
           setPosition({
