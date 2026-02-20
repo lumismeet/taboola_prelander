@@ -5,6 +5,7 @@ import { useVisitorTracking } from "@/hooks/useVisitorTracking";
 import logoo from "../assets//logoauto.png"
 import hero from "../assets/car-lady1.png"
 import img1 from "../assets/car_shocked.png"
+import USMap from "@/components/USMap"
 // import img1 from "../assets/money_policy.png"
 import img2 from "../assets/happy_family.png"
 import { useState, useEffect } from "react";
@@ -112,8 +113,19 @@ useEffect(() => {
 </div> */}
 
 
-
         </section>
+
+        <section className="my-16 text-center">
+  <h3 className="text-2xl font-bold mb-6">
+    Check Availability in Your State
+  </h3>
+
+  <p className="text-slate-600 mb-8">
+    Hover over your state to see where drivers are comparing rates.
+  </p>
+
+  <USMap />
+</section>
 
        
 <div className="bg-white border-l-4 border-sky-400 shadow-sm rounded-r-xl px-6 py-4 mb-8 text-left">
