@@ -58,7 +58,7 @@ useEffect(() => {
           
           <button
             onClick={handleClick}
-            className="hidden md:block bg-sky-400 hover:bg-sky-500 text-white font-semibold px-6 py-2 rounded-full transition cursor-pointer"
+            className="hidden md:block bg-sky-400 hover:bg-sky-500 text-white font-semibold px-6 py-2 rounded-sm transition cursor-pointer"
           >
             Learn How
           </button>
@@ -81,7 +81,7 @@ useEffect(() => {
     <img src={logoo} alt="Logo" className="h-10" />
     <button
       onClick={handleClick}
-      className="hidden md:block bg-sky-400 hover:bg-sky-500 text-white font-semibold px-6 py-2 rounded-full transition cursor-pointer"
+      className="hidden md:block bg-[#128CED] hover:bg-sky-500 text-white font-semibold px-6 py-2 rounded-sm transition cursor-pointer"
     >
       Check Rates for free!
     </button>
@@ -112,25 +112,14 @@ useEffect(() => {
 
           {/* <div className="bg-white shadow-md rounded p-4 my-6 inline-block">
   <p className="font-semibold text-slate-800">
-    “Average drivers saved $420 last month using Auto Savings!”
+    “Average drivers saved $420 last month using Otto Savings!”
   </p>
 </div> */}
 
 
         </section>
 
-        {/* US MAP */}
-        <section className="my-16 text-center">
-          <h3 className="text-2xl font-bold mb-6">
-            Check Availability in Your State
-          </h3>
-
-          <p className="text-slate-600 mb-8">
-            Hover over your state to see where drivers are comparing rates.
-          </p>
-
-          <USMap />
-        </section>
+       
 
        
         <div className="bg-white border-l-4 border-sky-400 shadow-sm rounded-r-xl px-6 py-4 mb-8 text-left">
@@ -149,6 +138,19 @@ useEffect(() => {
           alt="Car Insurance"
           className="w-full h-[350px] object-cover"
         />
+
+         {/* US MAP */}
+        <section className="my-16 text-center">
+          <h3 className="text-2xl font-bold mb-6">
+            Check Availability in Your State
+          </h3>
+
+          <p className="text-slate-600 mb-8">
+            Hover over your state to see where drivers are comparing rates.
+          </p>
+
+          <USMap />
+        </section>
 
         <section className="py-14">
           <div className="max-w-3xl mx-auto px-6">
@@ -176,7 +178,7 @@ useEffect(() => {
                   placeholder="e.g. Honda Civic"
                   value={carModel}
                   onChange={(e) => setCarModel(e.target.value)}
-                  className="w-full border border-slate-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition"
+                  className="w-full border border-slate-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
                 />
               </div>
 
@@ -190,13 +192,13 @@ useEffect(() => {
                   placeholder="e.g. 2018"
                   value={carYear}
                   onChange={(e) => setCarYear(e.target.value)}
-                  className="w-full border border-slate-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition"
+                  className="w-full border border-slate-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
                 />
               </div>
 
               {/* CTA */}
               <button
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-full text-lg transition shadow-md"
+                className="w-full bg-[#128CED] hover:bg-blue-400 text-white font-bold py-5 rounded-sm text-lg transition shadow-md"
               >
                 Check My Rate →
               </button>
@@ -227,7 +229,7 @@ useEffect(() => {
           </p>
 
           <p className="text-slate-600 leading-relaxed">
-            Checking rates online is free and does not require you to make any immediate changes. It simply gives you visibility into what is available in your area so you can choose what fits your needs and your budget by clicking on <a href="https://auto-savings.com/home.html" className="text-blue-600 underline">Auto Savings</a>
+            Checking rates online is free and does not require you to make any immediate changes. It simply gives you visibility into what is available in your area so you can choose what fits your needs and your budget by clicking on <a href="https://auto-savings.com/home.html" className="text-blue-600 underline">Otto Savings</a>
           </p>
         </section>
 
@@ -299,7 +301,7 @@ useEffect(() => {
             <p>No long phone calls.</p>
             <p>No pressure to switch.</p>
             <p>No obligation to purchase anything.</p>
-            <p>Just a fast and simple way to see what is currently available near you. Click here <a href="https://auto-savings.com/home.html" className="text-blue-600 underline">Auto Savings</a> to get the best deals!</p>
+            <p>Just a fast and simple way to see what is currently available near you. Click here <a href="https://auto-savings.com/home.html" className="text-blue-600 underline">Otto Savings</a> to get the best deals!</p>
           </div>
         </section>
 
@@ -352,7 +354,7 @@ useEffect(() => {
           </ul>
 
           <p className="text-slate-600">
-            There is no obligation to switch providers. To be more informed visit <a href="https://auto-savings.com/home.html" className="text-blue-600 underline">Auto Savings</a> today. You are simply gathering information so you can make a confident decision when your renewal date approaches.
+            There is no obligation to switch providers. To be more informed visit <a href="https://auto-savings.com/home.html" className="text-blue-600 underline">Otto Savings</a> today. You are simply gathering information so you can make a confident decision when your renewal date approaches.
           </p>
         </section>
 
@@ -396,7 +398,7 @@ useEffect(() => {
         {/* <div className="text-center mb-20">
           <button
             onClick={handleClick}
-            className="bg-sky-400 hover:bg-sky-500 text-white font-semibold px-8 py-3 rounded-full transition cursor-pointer"
+            className="bg-sky-400 hover:bg-sky-500 text-white font-semibold px-8 py-3 rounded-sm transition cursor-pointer"
           >
             Learn How
           </button>
@@ -405,7 +407,7 @@ useEffect(() => {
 <div className="text-center mb-20">
   <button
     onClick={handleClick}
-    className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-10 py-4 rounded-full text-lg transition cursor-pointer shadow-lg"
+    className="bg-[#128CED] hover:bg-blue-500 text-white font-bold px-10 py-4 rounded-sm text-lg transition cursor-pointer shadow-lg"
   >
     Check My Rate - Free, No Obligation →
   </button>
