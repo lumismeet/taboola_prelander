@@ -12,6 +12,8 @@ import { useState, useEffect } from "react";
 
 const DESTINATION_URL = "https://auto-savings.com/home.html";
 
+
+
 const getCurrentMonth = () => {
   return new Date().toLocaleString("en-US", { month: "long" });
 };
@@ -21,6 +23,8 @@ const HeroSection = () => {
   const { trackCtaClick } = useVisitorTracking();
 const [stateName, setStateName] = useState("");
 const [visitorCount] = useState(() => Math.floor(Math.random() * 300) + 600); // e.g. 847
+const [carModel, setCarModel] = useState("");
+  const [carYear, setCarYear] = useState("");
 
 useEffect(() => {
   fetch("https://ipapi.co/json/")
@@ -128,15 +132,15 @@ useEffect(() => {
 </section>
 
        
-<div className="bg-white border-l-4 border-sky-400 shadow-sm rounded-r-xl px-6 py-4 mb-8 text-left">
-  <p className="text-slate-700 text-sm leading-relaxed mb-2">
-    "My renewal jumped $47 a month. I took just about 2 minutes to compare on here and switched that same afternoon. 
-    I seriously saved over $500 for the year!"
-  </p>
-  <p className="text-sm font-semibold text-slate-800">
-    Melissa Tanner <span className="text-slate-400 font-normal">— Phoenix, AZ</span>
-  </p>
-</div>
+        <div className="bg-white border-l-4 border-sky-400 shadow-sm rounded-r-xl px-6 py-4 mb-8 text-left">
+          <p className="text-slate-700 text-sm leading-relaxed mb-2">
+            "My renewal jumped $47 a month. I took just about 2 minutes to compare on here and switched that same afternoon.
+            I seriously saved over $500 for the year!"
+          </p>
+          <p className="text-sm font-semibold text-slate-800">
+            Melissa Tanner <span className="text-slate-400 font-normal">— Phoenix, AZ</span>
+          </p>
+        </div>
 
         {/* LARGE IMAGE */}
         <img
@@ -145,6 +149,64 @@ useEffect(() => {
           className="w-full h-[350px] object-cover"
         />
 
+        <section className="py-14">
+          <div className="max-w-3xl mx-auto px-6">
+
+            {/* Heading */}
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900">
+                Tell Us About Your Vehicle
+              </h2>
+              <p className="text-slate-600 mt-2">
+                Takes less than 30 seconds to check your savings.
+              </p>
+            </div>
+
+            {/* Form Card */}
+            <div className="bg-white shadow-md rounded-xl p-8 space-y-6 border">
+
+              {/* Car Model */}
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                  What do you drive?
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. Honda Civic"
+                  value={carModel}
+                  onChange={(e) => setCarModel(e.target.value)}
+                  className="w-full border border-slate-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition"
+                />
+              </div>
+
+              {/* Car Year */}
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                  Vehicle Year
+                </label>
+                <input
+                  type="number"
+                  placeholder="e.g. 2018"
+                  value={carYear}
+                  onChange={(e) => setCarYear(e.target.value)}
+                  className="w-full border border-slate-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition"
+                />
+              </div>
+
+              {/* CTA */}
+              <button
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-full text-lg transition shadow-md"
+              >
+                Check My Rate →
+              </button>
+
+              <p className="text-center text-xs text-slate-400">
+                Free • No obligation • No spam calls
+              </p>
+
+            </div>
+          </div>
+        </section>
        
         <section className="space-y-6">
           <h3 className="text-xl font-bold">
@@ -167,6 +229,8 @@ useEffect(() => {
             Checking rates online is free and does not require you to make any immediate changes. It simply gives you visibility into what is available in your area so you can choose what fits your needs and your budget by clicking on <a href="https://auto-savings.com/home.html" className="text-blue-600 underline">Auto Savings</a>
           </p>
         </section>
+
+
 
         {/* TWO IMAGES */}
         <div className="grid md:grid-cols-2 gap-6 mb-1 mt-7">
