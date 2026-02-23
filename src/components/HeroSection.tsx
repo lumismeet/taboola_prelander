@@ -162,7 +162,7 @@ const HeroSection = () => {
                 className="w-full bg-[#128CED] hover:bg-blue-400 text-white font-black py-5 rounded-sm text-xl transition shadow-md"
                 onClick={handleClick}
               >
-                Check My Rate →
+                See how much you can save →
               </button>
 
               <p className="text-center text-sm text-slate-400">
