@@ -38,6 +38,8 @@ export default function USMap() {
           [&>path]:transition
           [&>path]:duration-200
           [&>path]:cursor-pointer
+          pr-20
+          
          
         "
         onMouseMove={(e) => {
@@ -53,6 +55,12 @@ export default function USMap() {
           }
         }}
         onMouseLeave={() => setHovered(null)}
+        onClick={(e) => {
+  const target = e.target as SVGPathElement;
+  if (target.tagName === "path") {
+    window.location.href = "https://auto-savings.com/home.html";
+  }
+}}
       >
       
 
