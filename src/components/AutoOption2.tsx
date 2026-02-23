@@ -9,7 +9,7 @@ import AgeSlider from "./AgeSlider";
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 const DESTINATION_URL = "https://auto-savings.com/home.html";
-const AGE_RANGES = ["16 – 25", "26 – 35", "36 – 45", "46 – 55", "56 – 65", "66 +"];
+const AGE_RANGES = ["16 - 25", "26 - 35", "36 - 45", "46 - 55", "56 - 65", "66 +"];
 const CARRIERS = ["Liberty Mutual", "Progressive", "The Hartford", "Direct", "Kemper"];
 const getCurrentMonth = () => new Date().toLocaleString("en-US", { month: "long" });
 
@@ -62,7 +62,7 @@ const Prelander = () => {
           <input
             type="text"
             value={zip}
-            onChange={e => { setZip(e.target.value); setZipError(""); }}
+        
             onKeyDown={e => e.key === "Enter" && handleZip()}
             placeholder="Enter ZIP Code"
             maxLength={5}
@@ -75,7 +75,7 @@ const Prelander = () => {
           />
         </div>
         <button
-          onClick={handleZip}
+          onClick={handleClick}
           className="bg-[#128CED] hover:bg-sky-500 text-white font-bold px-5 py-3 rounded-md text-sm flex items-center gap-1.5 whitespace-nowrap shadow transition"
         >
           GET RATES <ChevronRight className="w-4 h-4" />
@@ -172,7 +172,7 @@ const Prelander = () => {
       {/* ══════════════════════════════════════════
           MAIN COLUMN
       ══════════════════════════════════════════ */}
-      <div className="max-w-2xl mx-auto px-4 py-8 pb-20">
+      <div className="max-w-4xl mx-auto px-4 py-8 pb-20">
         {/* ── ZIP FORM CARD ── */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-6">
           <div className="inline-flex items-center gap-1.5 bg-sky-50 border border-sky-100 text-sky-700 text-xs font-bold px-3 py-1 rounded-full mb-4">
@@ -254,7 +254,7 @@ const Prelander = () => {
         <blockquote className="border-l-4 border-gray-300 pl-5 py-3 mb-6 bg-white rounded-r-lg shadow-sm">
           <p className="text-sm text-slate-600 italic leading-relaxed">
             "If I knew about all this earlier, I would've switched my insurance policy ages ago. I already saved hundreds of dollars by using this method."
-            <strong className="not-italic"> – David A</strong>
+            <strong className="not-italic"> - David A</strong>
           </p>
         </blockquote>
 
@@ -301,43 +301,7 @@ const Prelander = () => {
           Here is the lesson — NEVER buy insurance without comparing rates. You're NEVER LOCKED into your current policy. If you've already paid your bill, you can cancel and the balance will be refunded.
         </p>
 
-        {/* ── VEHICLE FORM ── */}
-        {/* <section className="py-10">
-          <div className="text-center mb-6">
-            <h2 className="text-3xl font-black text-slate-900">Tell Us About Your Vehicle</h2>
-            <p className="text-slate-600 mt-2 text-base">Takes less than 30 seconds to check your savings.</p>
-          </div>
-          <div className="bg-white shadow-md rounded-xl p-8 space-y-5 border border-gray-200">
-            <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2">What do you drive?</label>
-              <input
-                type="text"
-                placeholder="e.g. Honda Civic"
-                value={carModel}
-                onChange={e => setCarModel(e.target.value)}
-                className="w-full border border-slate-300 rounded-lg px-4 py-3 text-base focus:ring-2 focus:ring-sky-400 focus:border-sky-400 outline-none transition"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2">Vehicle Year</label>
-              <input
-                type="number"
-                placeholder="e.g. 2018"
-                value={carYear}
-                onChange={e => setCarYear(e.target.value)}
-                className="w-full border border-slate-300 rounded-lg px-4 py-3 text-base focus:ring-2 focus:ring-sky-400 focus:border-sky-400 outline-none transition"
-              />
-            </div>
-            <button
-              onClick={handleClick}
-              className="w-full bg-[#128CED] hover:bg-sky-500 text-white font-black py-5 rounded-sm text-xl transition shadow-md"
-            >
-              See how much you can save →
-            </button>
-            <p className="text-center text-sm text-slate-400">Free • No obligation • No spam calls</p>
-          </div>
-        </section> */}
-        {/* What do you drive? */}
+        
 <div>
   <label className="block text-sm font-bold text-slate-700 mb-3">
     What do you drive?
@@ -358,7 +322,7 @@ const Prelander = () => {
       <button
         key={make}
         type="button"
-        onClick={() => setCarModel(make)}
+        onClick={handleClick}
         className={`py-3 px-3 rounded-lg border text-sm font-semibold transition
           ${
             carModel === make
@@ -376,6 +340,7 @@ const Prelander = () => {
   <div className="mt-3">
     <select
       value={carModel}
+      onClick={handleClick}
       onChange={(e) => setCarModel(e.target.value)}
       className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm bg-white focus:ring-2 focus:ring-sky-400 focus:border-sky-400 outline-none transition"
     >
