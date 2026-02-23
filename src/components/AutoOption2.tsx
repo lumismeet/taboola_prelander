@@ -1,36 +1,59 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CheckCircle, Lock, ChevronRight, MapPin, ShieldCheck } from "lucide-react";
+import { useVisitorTracking } from "@/hooks/useVisitorTracking";
+import logoo from "../assets/logoauto.png";
+import USMap from "./USMap";
+import AgeSlider from "./AgeSlider";
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 const DESTINATION_URL = "https://auto-savings.com/home.html";
-const STATE_NAME = "Oregon"; // ← swap this to make state-specific versions
 const AGE_RANGES = ["16 – 25", "26 – 35", "36 – 45", "46 – 55", "56 – 65", "66 +"];
 const CARRIERS = ["Liberty Mutual", "Progressive", "The Hartford", "Direct", "Kemper"];
+const getCurrentMonth = () => new Date().toLocaleString("en-US", { month: "long" });
 
-// ─── COMPONENT ───────────────────────────────────────────────────────────────
-export default function Prelander() {
+// ─── MAIN ────────────────────────────────────────────────────────────────────
+const Prelander = () => {
+  const { trackCtaClick } = useVisitorTracking();
+
   const [zip, setZip] = useState("");
   const [zipError, setZipError] = useState("");
   const [selectedAge, setSelectedAge] = useState<string | null>(null);
+  const [stateName, setStateName] = useState("");
+  const [carModel, setCarModel] = useState("");
+  const [carYear, setCarYear] = useState("");
+  const [visitorCount] = useState(() => Math.floor(Math.random() * 300) + 600);
 
-  const go = () => (window.location.href = DESTINATION_URL);
+  useEffect(() => {
+    fetch("https://ipapi.co/json/")
+      .then(r => r.json())
+      .then(d => setStateName(d.region || ""))
+      .catch(() => {});
+  }, []);
+
+  const handleClick = () => {
+    trackCtaClick();
+    window.location.href = DESTINATION_URL;
+  };
 
   const handleZip = () => {
     const t = zip.trim();
     if (!t) { setZipError("Please enter your ZIP code."); return; }
     if (!/^\d{5}$/.test(t)) { setZipError("Please enter a valid 5-digit ZIP."); return; }
     setZipError("");
-    go();
+    handleClick();
   };
 
   const handleAge = (age: string) => {
     setSelectedAge(age);
-    setTimeout(go, 280);
+    setTimeout(handleClick, 280);
   };
 
-  // Shared ZIP input + button UI
+  const displayState = stateName || "Your State";
+  const currentMonth = getCurrentMonth();
+
+  // ── Reusable ZIP row ──────────────────────────────────────────────────────
   const ZipRow = ({ dark = false }: { dark?: boolean }) => (
     <div>
       <div className="flex gap-2">
@@ -39,12 +62,12 @@ export default function Prelander() {
           <input
             type="text"
             value={zip}
-            onChange={(e) => { setZip(e.target.value); setZipError(""); }}
-            onKeyDown={(e) => e.key === "Enter" && handleZip()}
+            onChange={e => { setZip(e.target.value); setZipError(""); }}
+            onKeyDown={e => e.key === "Enter" && handleZip()}
             placeholder="Enter ZIP Code"
             maxLength={5}
             className={[
-              "prelander-zip w-full rounded-md pl-9 pr-3 py-3 text-sm border transition",
+              "prel-zip w-full rounded-md pl-9 pr-3 py-3 text-sm border transition",
               dark
                 ? "bg-gray-800 border-gray-600 text-white placeholder:text-gray-500"
                 : "bg-white border-gray-300 text-gray-900",
@@ -53,7 +76,7 @@ export default function Prelander() {
         </div>
         <button
           onClick={handleZip}
-          className="prelander-gbtn bg-green-600 text-white font-bold px-5 py-3 rounded-md text-sm flex items-center gap-1.5 whitespace-nowrap shadow"
+          className="bg-[#128CED] hover:bg-sky-500 text-white font-bold px-5 py-3 rounded-md text-sm flex items-center gap-1.5 whitespace-nowrap shadow transition"
         >
           GET RATES <ChevronRight className="w-4 h-4" />
         </button>
@@ -63,24 +86,13 @@ export default function Prelander() {
   );
 
   return (
-    <div className="min-h-screen bg-white text-gray-900" style={{ fontFamily: "'Source Sans 3', Arial, sans-serif" }}>
+    <div className="min-h-screen bg-gray-100 text-slate-800" style={{ fontFamily: "'Source Sans 3', Arial, sans-serif" }}>
 
-      {/* ── GOOGLE FONTS ── */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
-
-        .prelander-serif  { font-family: 'Merriweather', Georgia, serif; }
-        .prelander-sans   { font-family: 'Source Sans 3', Arial, sans-serif; }
-
-        .prelander-zip:focus {
-          outline: none;
-          border-color: #1d4ed8;
-          box-shadow: 0 0 0 3px rgba(29,78,216,0.12);
-        }
-        .prelander-gbtn { transition: background 0.15s; }
-        .prelander-gbtn:hover { background: #15803d !important; }
-
-        .prelander-age-btn {
+        .prel-serif { font-family: 'Merriweather', Georgia, serif; }
+        .prel-zip:focus { outline: none; border-color: #128CED; box-shadow: 0 0 0 3px rgba(18,140,237,0.15); }
+        .prel-age-btn {
           font-family: 'Source Sans 3', Arial, sans-serif;
           transition: all 0.15s;
           background: white;
@@ -92,337 +104,531 @@ export default function Prelander() {
           color: #374151;
           cursor: pointer;
         }
-        .prelander-age-btn:hover,
-        .prelander-age-btn.selected {
-          background: #1d4ed8 !important;
+        .prel-age-btn:hover, .prel-age-btn.sel {
+          background: #128CED !important;
           color: white !important;
-          border-color: #1d4ed8 !important;
+          border-color: #128CED !important;
         }
       `}</style>
 
-      {/* ════════════════════════════════════════════
+      {/* ══════════════════════════════════════════
+          URGENCY BAR
+      ══════════════════════════════════════════ */}
+      <div className="bg-amber-400 text-slate-900 text-center text-sm font-bold py-2 px-4 sticky top-0 z-50">
+        ⚠️ Rates in {displayState} were updated today — {visitorCount} drivers checked this week.{" "}
+        <span className="underline cursor-pointer" onClick={handleClick}>Check yours now →</span>
+      </div>
+
+      {/* ══════════════════════════════════════════
           NAVBAR
-      ════════════════════════════════════════════ */}
-      <nav style={{ background: "white", borderBottom: "1px solid #e5e7eb" }}>
-        <div style={{ maxWidth: 700, margin: "0 auto", padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div className="prelander-serif" style={{ fontSize: 22, fontWeight: 900, letterSpacing: "-0.5px" }}>
-            <span style={{ color: "#2563eb" }}>P</span>retected
-          </div>
-          <div style={{ fontSize: 11, color: "#9ca3af", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>
-            AUTO INSURANCE
-          </div>
-        </div>
-      </nav>
-
-      {/* ════════════════════════════════════════════
-          HERO BANNER  ← swap the placeholder div
-          with your <Image> or <img> tag
-      ════════════════════════════════════════════ */}
-      <div style={{ position: "relative", minHeight: 200, background: "linear-gradient(135deg,#0f172a 0%,#1e3a5f 55%,#0f172a 100%)", overflow: "hidden" }}>
-
-        {/*
-          ╔══════════════════════════════════════╗
-          ║   PHOTO PLACEHOLDER                  ║
-          ║   Replace this <div> with:           ║
-          ║   <Image                             ║
-          ║     src="/your-hero-photo.jpg"       ║
-          ║     alt="hero"                       ║
-          ║     fill                             ║
-          ║     className="object-cover"         ║
-          ║     style={{ opacity: 0.35 }}        ║
-          ║   />                                 ║
-          ╚══════════════════════════════════════╝
-        */}
-        <div style={{
-          position: "absolute", inset: 0,
-          display: "flex", alignItems: "center", justifyContent: "center",
-          border: "2px dashed rgba(255,255,255,0.15)", margin: 8, borderRadius: 8,
-          color: "rgba(255,255,255,0.2)", fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase",
-          fontFamily: "sans-serif",
-        }}>
-          [ Hero Photo — replace with your &lt;Image /&gt; ]
-        </div>
-
-        <div style={{ position: "relative", zIndex: 10, maxWidth: 700, margin: "0 auto", padding: "60px 16px", textAlign: "center" }}>
-          <h1
-            className="prelander-serif"
-            style={{ fontSize: "clamp(20px,4vw,36px)", fontWeight: 900, color: "white", lineHeight: 1.25, textShadow: "0 2px 12px rgba(0,0,0,0.7)" }}
+      ══════════════════════════════════════════ */}
+      <div className="sticky top-8 z-40 bg-white shadow-md">
+        <div className="max-w-3xl mx-auto px-6 py-3 flex items-center justify-between">
+          <img src={logoo} alt="Logo" className="h-10" />
+          <button
+            onClick={handleClick}
+            className="hidden md:block bg-[#128CED] hover:bg-sky-500 text-white font-bold text-sm px-6 py-2 rounded-sm transition"
           >
-            Why Did No One Tell {STATE_NAME} Drivers About This?
+            Save Now!
+          </button>
+        </div>
+      </div>
+
+      {/* ══════════════════════════════════════════
+          HERO BANNER
+          ↓ replace the placeholder div with:
+          <img src={yourHeroImg} alt="hero"
+            className="absolute inset-0 w-full h-full object-cover opacity-30" />
+      ══════════════════════════════════════════ */}
+      <div className="relative overflow-hidden" style={{ background: "linear-gradient(135deg,#0f172a 0%,#0c3a5e 55%,#0f172a 100%)", minHeight: 220 }}>
+
+        {/* ↓ PHOTO PLACEHOLDER — swap this div with your <img> */}
+        <div className="absolute inset-0 m-2 rounded-lg border-2 border-dashed border-white/10 flex items-center justify-center text-white/15 text-xs uppercase tracking-widest">
+          [ Hero Photo Placeholder ]
+        </div>
+
+        <div className="relative z-10 text-center py-16 px-4 max-w-3xl mx-auto">
+          <div className="inline-block bg-amber-400 text-slate-900 text-xs font-black px-3 py-1 rounded-full mb-4 uppercase tracking-widest">
+            {currentMonth} Update
+          </div>
+          <h1 className="prel-serif text-white font-black leading-tight" style={{ fontSize: "clamp(22px,4.5vw,40px)", textShadow: "0 2px 16px rgba(0,0,0,0.7)" }}>
+            Why Did No One Tell {displayState} Drivers About This?
           </h1>
+          <p className="text-sky-200 mt-3 text-sm">CheckAutoPlans • {new Date().toLocaleDateString()}</p>
         </div>
       </div>
 
-      {/* ── BREADCRUMB ── */}
-      <div style={{ background: "#f9fafb", borderBottom: "1px solid #e5e7eb" }}>
-        <div style={{ maxWidth: 700, margin: "0 auto", padding: "8px 16px", display: "flex", alignItems: "center", gap: 4, fontSize: 12, color: "#9ca3af" }}>
-          <a href="#" style={{ color: "#3b82f6" }}>Home</a>
-          <ChevronRight style={{ width: 12, height: 12 }} />
-          <span>Why Did No One Tell {STATE_NAME} Drivers About This?</span>
+      {/* ══════════════════════════════════════════
+          BREADCRUMB
+      ══════════════════════════════════════════ */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-2xl mx-auto px-4 py-2 flex items-center gap-1 text-xs text-gray-400">
+          <a href="#" className="text-[#128CED]">Home</a>
+          <ChevronRight className="w-3 h-3" />
+          <span>Why Did No One Tell {displayState} Drivers About This?</span>
         </div>
       </div>
 
-      {/* ════════════════════════════════════════════
+      {/* ══════════════════════════════════════════
           MAIN COLUMN
-      ════════════════════════════════════════════ */}
-      <div style={{ maxWidth: 620, margin: "0 auto", padding: "28px 16px 60px" }}>
-
-        {/* ─────────────────────────────────────────
-            ZIP FORM CARD
-        ───────────────────────────────────────── */}
-        <div style={{ border: "1px solid #e5e7eb", borderRadius: 10, padding: 20, marginBottom: 28, background: "white", boxShadow: "0 1px 6px rgba(0,0,0,0.06)" }}>
-
-          {/* Badge */}
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#eff6ff", border: "1px solid #bfdbfe", color: "#1d4ed8", fontSize: 12, fontWeight: 700, padding: "4px 12px", borderRadius: 999, marginBottom: 14 }}>
-            <ShieldCheck style={{ width: 14, height: 14 }} />
+      ══════════════════════════════════════════ */}
+      <div className="max-w-2xl mx-auto px-4 py-8 pb-20">
+        {/* ── ZIP FORM CARD ── */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-6">
+          <div className="inline-flex items-center gap-1.5 bg-sky-50 border border-sky-100 text-sky-700 text-xs font-bold px-3 py-1 rounded-full mb-4">
+            <ShieldCheck className="w-3.5 h-3.5" />
             Trusted by 10M+ Drivers
           </div>
-
-          <p style={{ fontSize: 14, fontWeight: 600, color: "#111827", marginBottom: 4 }}>
+          <p className="text-sm font-semibold text-gray-900 mb-1">
             Enter your <strong>ZIP code</strong> to compare your different options and stop overpaying!
           </p>
-          <p style={{ fontSize: 12, color: "#6b7280", marginBottom: 16, lineHeight: 1.6 }}>
+          <p className="text-xs text-gray-500 mb-4 leading-relaxed">
             Insurance rates change constantly. Find out if you're eligible for lower premiums from leading providers.
           </p>
 
           <ZipRow />
 
-          {/* Trust badges */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginTop: 12, fontSize: 12, color: "#6b7280" }}>
-            {[
-              { icon: <CheckCircle style={{ width: 14, height: 14, color: "#16a34a" }} />, label: "100% Free" },
-              { icon: <CheckCircle style={{ width: 14, height: 14, color: "#16a34a" }} />, label: "No Obligation" },
-              { icon: <Lock style={{ width: 14, height: 14, color: "#16a34a" }} />, label: "Secure & Private" },
-            ].map((t, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 4 }}>{t.icon}{t.label}</div>
-            ))}
+          <div className="flex flex-wrap gap-4 mt-3 text-xs text-gray-500">
+            <div className="flex items-center gap-1"><CheckCircle className="w-3.5 h-3.5 text-green-500" /> 100% Free</div>
+            <div className="flex items-center gap-1"><CheckCircle className="w-3.5 h-3.5 text-green-500" /> No Obligation</div>
+            <div className="flex items-center gap-1"><Lock className="w-3.5 h-3.5 text-green-500" /> Secure & Private</div>
           </div>
 
-          {/* Carrier pills */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 14, paddingTop: 14, borderTop: "1px solid #f3f4f6" }}>
+          <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gray-100">
             {CARRIERS.map(c => (
-              <span key={c} style={{ background: "#f3f4f6", border: "1px solid #e5e7eb", color: "#6b7280", fontSize: 11, fontWeight: 700, padding: "4px 10px", borderRadius: 4 }}>
+              <span key={c} className="bg-gray-100 border border-gray-200 text-gray-500 text-xs font-bold px-3 py-1 rounded">
                 {c}
               </span>
             ))}
           </div>
         </div>
 
-        {/* ─────────────────────────────────────────
-            BODY COPY — SECTION 1
-        ───────────────────────────────────────── */}
-        <p style={{ fontSize: 14, color: "#4b5563", marginBottom: 12, lineHeight: 1.7 }}>
-          Here is the 1 simple truth according to experts:
-        </p>
+        {/* ── HERO PULL QUOTE (HeroSection style) ── */}
+        <div className="bg-white border-l-4 border-sky-400 shadow-sm rounded-r-xl px-6 py-4 mb-6">
+          <p className="text-slate-700 text-sm leading-relaxed mb-2">
+            "My renewal jumped $47 a month. I took just about 2 minutes to compare on here and switched that same afternoon.
+            I seriously saved over $500 for the year!"
+          </p>
+          <p className="text-sm font-bold text-slate-800">
+            Melissa Tanner <span className="text-slate-400 font-normal">— Phoenix, AZ</span>
+          </p>
+        </div>
 
-        <p style={{ fontSize: 14, fontWeight: 700, color: "#111827", marginBottom: 8 }}>If You:</p>
+        {/* ── IMAGE PLACEHOLDER 1 ── */}
+        {/* swap with: <img src={img1} alt="Car Insurance" className="w-full h-[300px] object-cover rounded-xl mb-6" /> */}
+        <div className="w-full h-64 rounded-xl mb-6 bg-gray-200 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-xs uppercase tracking-widest font-semibold">
+          [ img1 — car_shocked.png ]
+        </div>
 
-        <ul style={{ marginBottom: 16, paddingLeft: 4, listStyle: "none" }}>
+        {/* ── BODY COPY 1 ── */}
+        <p className="text-sm text-slate-600 mb-3 leading-relaxed">Here is the 1 simple truth according to experts:</p>
+
+        <p className="text-sm font-bold text-slate-900 mb-2">If You:</p>
+        <ul className="mb-5 space-y-1.5">
           {["Are Currently Insured", "Are Over The Age Of 25", "Drive Less Than 50 Miles Per Day", "Live In A Qualified Zip Code"].map((item, i) => (
-            <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: 8, marginBottom: 6, fontSize: 14, color: "#1f2937", fontWeight: 600 }}>
-              <span style={{ color: "#6b7280", lineHeight: 1.6 }}>•</span> {item}
+            <li key={i} className="flex items-start gap-2 text-sm text-slate-800 font-semibold">
+              <span className="text-slate-400 mt-0.5">•</span>{item}
             </li>
           ))}
         </ul>
 
-        <p style={{ fontSize: 14, color: "#4b5563", lineHeight: 1.7, marginBottom: 32 }}>
+        <p className="text-sm text-slate-600 leading-relaxed mb-8">
           Then you may qualify for massive auto insurance discounts. If you have not had a traffic ticket in the last 3 years or do not have a DUI on your record, you may get an even larger discount and{" "}
-          <a href={DESTINATION_URL} style={{ color: "#2563eb", fontWeight: 700, textDecoration: "underline" }}>
-            save up to $500 a year.
-          </a>
+          <a href={DESTINATION_URL} className="font-bold underline text-[#128CED]">save up to $500 a year.</a>
         </p>
 
-        {/* ─────────────────────────────────────────
-            H2
-        ───────────────────────────────────────── */}
-        <h2 className="prelander-serif" style={{ fontSize: "clamp(20px,3.5vw,30px)", fontWeight: 900, color: "#111827", lineHeight: 1.3, marginBottom: 16 }}>
+        {/* ── H2 ── */}
+        <h2 className="prel-serif font-black text-slate-900 leading-tight mb-4" style={{ fontSize: "clamp(20px,3.5vw,28px)" }}>
           Did Your Car Insurance Company Ever Tell You About This?
         </h2>
 
-        <p style={{ fontSize: 14, color: "#4b5563", lineHeight: 1.7, marginBottom: 12 }}>
-          Probably not, since the insurance companies prefer you not to be aware of such savings. They count on you just blindly renewing your policy at the same price — because that's how they increase profits.
+        <p className="text-sm text-slate-600 leading-relaxed mb-3">
+          Probably not, since the insurance companies prefer you not to be aware of such savings. They count on you blindly renewing your policy at the same price — because that's how they increase profits.
         </p>
 
-        <p style={{ fontSize: 14, color: "#4b5563", lineHeight: 1.7, marginBottom: 20 }}>
-          David was not happy with the rate he was paying for a long time, until he decided to enter his zip code at{" "}
-          <a href={DESTINATION_URL} style={{ color: "#2563eb", textDecoration: "underline" }}>Pretected.com</a>
-          {" "}— and he was truly amazed to see how much he could save.
+        <p className="text-sm text-slate-600 leading-relaxed mb-5">
+          David was not happy with the rate he was paying for a long time, until he decided to compare rates online — and he was truly amazed to see how much he could save.
         </p>
 
-        {/* ─────────────────────────────────────────
-            PULL QUOTE
-        ───────────────────────────────────────── */}
-        <blockquote style={{ borderLeft: "4px solid #d1d5db", paddingLeft: 20, paddingTop: 12, paddingBottom: 12, marginBottom: 24, background: "#f9fafb", borderRadius: "0 8px 8px 0" }}>
-          <p style={{ fontSize: 14, color: "#4b5563", fontStyle: "italic", lineHeight: 1.7, margin: 0 }}>
+        {/* ── PULL QUOTE ── */}
+        <blockquote className="border-l-4 border-gray-300 pl-5 py-3 mb-6 bg-white rounded-r-lg shadow-sm">
+          <p className="text-sm text-slate-600 italic leading-relaxed">
             "If I knew about all this earlier, I would've switched my insurance policy ages ago. I already saved hundreds of dollars by using this method."
-            <strong style={{ fontStyle: "normal" }}> – David A</strong>
+            <strong className="not-italic"> – David A</strong>
           </p>
         </blockquote>
 
-        {/* ─────────────────────────────────────────
-            COMPARISON GRAPHIC
-        ───────────────────────────────────────── */}
-        <div style={{ border: "1px solid #e5e7eb", borderRadius: 10, overflow: "hidden", marginBottom: 24, boxShadow: "0 1px 6px rgba(0,0,0,0.06)" }}>
-          {/* Header bar */}
-          <div style={{ background: "#1f2937", color: "white", fontSize: 12, fontWeight: 700, padding: "10px 16px", display: "flex", justifyContent: "space-between" }}>
+        {/* ── COMPARISON GRAPHIC ── */}
+        <div className="border border-gray-200 rounded-xl overflow-hidden mb-6 shadow-sm">
+          <div className="bg-slate-800 text-white text-xs font-bold px-4 py-2.5 flex justify-between">
             <span>Vehicle Total Premium</span>
-            <span style={{ color: "#9ca3af", fontWeight: 400 }}>Savings Example</span>
+            <span className="text-gray-400 font-normal">Savings Example</span>
           </div>
-
-          {/* Two columns */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-            {/* NEW */}
-            <div style={{ padding: 20, background: "#f0fdf4", borderRight: "1px solid #e5e7eb" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-                <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em" }}>6 Month Premium</span>
-                <span style={{ background: "#16a34a", color: "white", fontSize: 10, fontWeight: 800, padding: "2px 8px", borderRadius: 4 }}>NEW</span>
+          <div className="grid grid-cols-2 divide-x divide-gray-200">
+            <div className="p-5 bg-green-50">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs text-gray-500 font-bold uppercase tracking-wide">6 Month Premium</span>
+                <span className="bg-green-600 text-white text-xs font-black px-2 py-0.5 rounded">NEW</span>
               </div>
-              <p style={{ fontSize: 11, color: "#9ca3af", marginBottom: 8 }}>6 Month Premium = $67/mo</p>
-              <div style={{ background: "#bbf7d0", color: "#14532d", fontSize: 28, fontWeight: 900, textAlign: "center", padding: "16px 8px", borderRadius: 8, marginBottom: 10, fontFamily: "'Merriweather', Georgia, serif" }}>
-                $402
-              </div>
-              <p style={{ fontSize: 11, color: "#9ca3af", marginBottom: 4 }}>Added 12-06-26</p>
-              <p style={{ fontSize: 22, fontWeight: 900, color: "#15803d", fontFamily: "'Merriweather', Georgia, serif" }}>$67/MO*</p>
+              <p className="text-xs text-gray-400 mb-2">6 Month Premium = $67/mo</p>
+              <div className="bg-green-200 text-green-900 prel-serif font-black text-3xl text-center py-4 rounded-lg mb-2">$402</div>
+              <p className="text-xs text-gray-400 mb-1">Added 12-06-26</p>
+              <p className="prel-serif font-black text-2xl text-green-700">$67/MO*</p>
             </div>
-
-            {/* OLD */}
-            <div style={{ padding: 20, background: "#fff5f5" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-                <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em" }}>6 Month Premium</span>
-                <span style={{ background: "#dc2626", color: "white", fontSize: 10, fontWeight: 800, padding: "2px 8px", borderRadius: 4 }}>OLD</span>
+            <div className="p-5 bg-red-50">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs text-gray-500 font-bold uppercase tracking-wide">6 Month Premium</span>
+                <span className="bg-red-500 text-white text-xs font-black px-2 py-0.5 rounded">OLD</span>
               </div>
-              <p style={{ fontSize: 11, color: "#9ca3af", marginBottom: 8 }}>6 Month Premium = $120/mo</p>
-              <div style={{ background: "#fecaca", color: "#7f1d1d", fontSize: 28, fontWeight: 900, textAlign: "center", padding: "16px 8px", borderRadius: 8, marginBottom: 10, fontFamily: "'Merriweather', Georgia, serif" }}>
-                $720
-              </div>
-              <p style={{ fontSize: 11, color: "#9ca3af", marginBottom: 4 }}>Added 12-11-20</p>
-              <p style={{ fontSize: 22, fontWeight: 900, color: "#b91c1c", fontFamily: "'Merriweather', Georgia, serif" }}>$120/MO*</p>
+              <p className="text-xs text-gray-400 mb-2">6 Month Premium = $120/mo</p>
+              <div className="bg-red-200 text-red-900 prel-serif font-black text-3xl text-center py-4 rounded-lg mb-2">$720</div>
+              <p className="text-xs text-gray-400 mb-1">Added 12-11-20</p>
+              <p className="prel-serif font-black text-2xl text-red-700">$120/MO*</p>
             </div>
           </div>
-
-          {/* Savings banner */}
-          <div style={{ background: "#16a34a", color: "white", textAlign: "center", fontSize: 12, fontWeight: 700, padding: "10px 16px", letterSpacing: "0.02em" }}>
+          <div className="bg-green-600 text-white text-center text-xs font-bold py-2.5">
             💰 Potential Savings: $53/month · $318 every 6 months · $636/year
           </div>
         </div>
 
-        {/* ─────────────────────────────────────────
-            BODY COPY — SECTION 2
-        ───────────────────────────────────────── */}
-        <p style={{ fontSize: 14, color: "#4b5563", lineHeight: 1.7, marginBottom: 12 }}>
+        {/* ── BODY COPY 2 ── */}
+        <p className="text-sm text-slate-600 leading-relaxed mb-3">
           When people go to trusted sites like{" "}
-          <a href={DESTINATION_URL} style={{ color: "#2563eb", fontWeight: 700, textDecoration: "underline" }}>this</a>,
-          in 60 seconds they get a clear view of the best available rates in their area — and that includes all the discounts from multiple companies. You can even get rates as low as $19* a month! (* Average expenditure $89/mo).
+          <a href={DESTINATION_URL} className="font-bold underline text-[#128CED]">this</a>,
+          in 60 seconds they get a clear view of the best available rates in their area, including all discounts from multiple companies. You can even get rates as low as $19* a month! (* Average expenditure $89/mo).
+        </p>
+        <p className="text-sm text-slate-600 leading-relaxed mb-8">
+          Here is the lesson — NEVER buy insurance without comparing rates. You're NEVER LOCKED into your current policy. If you've already paid your bill, you can cancel and the balance will be refunded.
         </p>
 
-        <p style={{ fontSize: 14, color: "#4b5563", lineHeight: 1.7, marginBottom: 36 }}>
-          Here is the lesson to learn — NEVER buy insurance without comparing rates on sites that include updated rates that have all the discounts available. Important: You're NEVER LOCKED into your current policy. If you've already paid your bill, you can very easily cancel, and the balance will be refunded.
-        </p>
+        {/* ── VEHICLE FORM ── */}
+        {/* <section className="py-10">
+          <div className="text-center mb-6">
+            <h2 className="text-3xl font-black text-slate-900">Tell Us About Your Vehicle</h2>
+            <p className="text-slate-600 mt-2 text-base">Takes less than 30 seconds to check your savings.</p>
+          </div>
+          <div className="bg-white shadow-md rounded-xl p-8 space-y-5 border border-gray-200">
+            <div>
+              <label className="block text-sm font-bold text-slate-700 mb-2">What do you drive?</label>
+              <input
+                type="text"
+                placeholder="e.g. Honda Civic"
+                value={carModel}
+                onChange={e => setCarModel(e.target.value)}
+                className="w-full border border-slate-300 rounded-lg px-4 py-3 text-base focus:ring-2 focus:ring-sky-400 focus:border-sky-400 outline-none transition"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-bold text-slate-700 mb-2">Vehicle Year</label>
+              <input
+                type="number"
+                placeholder="e.g. 2018"
+                value={carYear}
+                onChange={e => setCarYear(e.target.value)}
+                className="w-full border border-slate-300 rounded-lg px-4 py-3 text-base focus:ring-2 focus:ring-sky-400 focus:border-sky-400 outline-none transition"
+              />
+            </div>
+            <button
+              onClick={handleClick}
+              className="w-full bg-[#128CED] hover:bg-sky-500 text-white font-black py-5 rounded-sm text-xl transition shadow-md"
+            >
+              See how much you can save →
+            </button>
+            <p className="text-center text-sm text-slate-400">Free • No obligation • No spam calls</p>
+          </div>
+        </section> */}
+        {/* What do you drive? */}
+<div>
+  <label className="block text-sm font-bold text-slate-700 mb-3">
+    What do you drive?
+  </label>
 
-        {/* ─────────────────────────────────────────
-            H2 — HOW TO DO IT
-        ───────────────────────────────────────── */}
-        <h2 className="prelander-serif" style={{ fontSize: "clamp(20px,3.5vw,30px)", fontWeight: 900, color: "#111827", lineHeight: 1.3, marginBottom: 16 }}>
+  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+    {[
+      "Honda",
+      "Toyota",
+      "Ford",
+      "Chevrolet",
+      "Tesla",
+      "BMW",
+      "Nissan",
+      "Hyundai",
+      "Kia",
+    ].map((make) => (
+      <button
+        key={make}
+        type="button"
+        onClick={() => setCarModel(make)}
+        className={`py-3 px-3 rounded-lg border text-sm font-semibold transition
+          ${
+            carModel === make
+              ? "bg-sky-100 border-sky-500 text-sky-700"
+              : "bg-white border-slate-200 hover:border-sky-400 hover:bg-sky-50 text-slate-700"
+          }
+        `}
+      >
+        {make}
+      </button>
+    ))}
+  </div>
+
+  {/* Optional compact fallback dropdown */}
+  <div className="mt-3">
+    <select
+      value={carModel}
+      onChange={(e) => setCarModel(e.target.value)}
+      className="w-full border border-slate-300 rounded-lg px-4 py-2 text-sm bg-white focus:ring-2 focus:ring-sky-400 focus:border-sky-400 outline-none transition"
+    >
+      <option value="">Other make</option>
+      <option value="Audi">Audi</option>
+      <option value="Mercedes-Benz">Mercedes-Benz</option>
+      <option value="Subaru">Subaru</option>
+      <option value="Volkswagen">Volkswagen</option>
+      <option value="Mazda">Mazda</option>
+    </select>
+  </div>
+</div>
+
+        {/* ── BODY COPY 3 ── */}
+        <section className="space-y-4 mb-10">
+          <h3 className="text-2xl font-black text-slate-900">Find the right car insurance rate and drive with confidence</h3>
+          <p className="text-slate-600 text-base leading-relaxed">
+            Insurance pricing changes more often than many people realize. Factors such as driving data, claim trends, repair costs, and regional statistics can influence what you are quoted at renewal.
+          </p>
+          <p className="text-slate-600 text-base leading-relaxed">
+            What felt like a competitive rate twelve months ago may not reflect current market pricing. That is why more drivers are taking a few minutes to review their options before committing to another policy term.
+          </p>
+          <p className="text-slate-600 text-base leading-relaxed">
+            Checking rates online is free and does not require you to make any immediate changes. Click on{" "}
+            <a href={DESTINATION_URL} className="text-[#128CED] underline">Otto Savings</a> to get started.
+          </p>
+        </section>
+
+        {/* ── TWO IMAGE PLACEHOLDERS ── */}
+        {/* swap with: <img src={hero} className="w-full h-[250px] object-cover" /> etc. */}
+        <div className="grid md:grid-cols-2 gap-4 mb-10">
+          <div className="w-full h-52 rounded-xl bg-gray-200 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-xs uppercase tracking-widest font-semibold">
+            [ hero — car-lady1.png ]
+          </div>
+          <div className="w-full h-52 rounded-xl bg-gray-200 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-xs uppercase tracking-widest font-semibold">
+            [ img2 — happy_family.png ]
+          </div>
+        </div>
+
+        {/* ── HOW IT WORKS ── */}
+        <section className="space-y-4 mb-10">
+          <h3 className="text-2xl font-black text-slate-900">Balance your budget and check rates now.</h3>
+          <p className="text-slate-600 text-base leading-relaxed">Getting started only takes a moment. The process is simple, straightforward, and completely online. No complicated paperwork and no long conversations.</p>
+          <p className="text-slate-600 text-base font-bold">Here is how it works:</p>
+          <ul className="list-disc pl-6 text-slate-600 text-base space-y-2">
+            <li>Click below to begin your free rate check</li>
+            <li>Enter your ZIP code and answer a few quick questions about your vehicle</li>
+            <li>Instantly compare available offers from insurers in your area</li>
+          </ul>
+          <p className="font-black text-base text-slate-900">That is all there is to it.</p>
+          <div className="text-slate-600 text-base space-y-1">
+            <p>No long phone calls.</p>
+            <p>No pressure to switch.</p>
+            <p>No obligation to purchase anything.</p>
+            <p>Just a fast and simple way to see what is currently available near you. Click here <a href={DESTINATION_URL} className="text-[#128CED] underline">Otto Savings</a> to get the best deals!</p>
+          </div>
+        </section>
+
+        {/* ── H2 — STEP BY STEP ── */}
+        <h2 className="prel-serif font-black text-slate-900 leading-tight mb-4" style={{ fontSize: "clamp(20px,3.5vw,28px)" }}>
           Here's How You Do It
         </h2>
-
-        <p style={{ fontSize: 14, color: "#4b5563", lineHeight: 1.7, marginBottom: 6 }}>
+        <p className="text-sm text-slate-600 leading-relaxed mb-2">
           <strong>Step 1: </strong>
-          <a href={DESTINATION_URL} style={{ color: "#2563eb", fontWeight: 600, textDecoration: "underline" }}>
-            Click your age below to instantly get your rate online.
-          </a>
+          <a href={DESTINATION_URL} className="font-semibold underline text-[#128CED]">Click your age below to instantly get your rate online.</a>
         </p>
-
-        <p style={{ fontSize: 14, color: "#4b5563", lineHeight: 1.7, marginBottom: 28 }}>
+        <p className="text-sm text-slate-600 leading-relaxed mb-8">
           <strong>Step 2: </strong> Once you enter your zip code and go through a few questions, you will have the opportunity to check the cheapest rates and save up to $500 a year.
         </p>
 
-        {/* ─────────────────────────────────────────
-            AGE SELECTOR
-        ───────────────────────────────────────── */}
-        <p style={{ textAlign: "center", fontWeight: 700, fontSize: 16, color: "#111827", marginBottom: 14 }}>
-          Select Your Age
-        </p>
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 8, marginBottom: 14 }}>
+        {/* ── AGE SELECTOR ── */}
+        <p className="text-center font-bold text-slate-900 text-base mb-4">Select Your Age</p>
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mb-4">
           {AGE_RANGES.map(age => (
             <button
               key={age}
               onClick={() => handleAge(age)}
-              className={`prelander-age-btn${selectedAge === age ? " selected" : ""}`}
+              className={`prel-age-btn${selectedAge === age ? " sel" : ""}`}
             >
               {age}
             </button>
           ))}
         </div>
-
         <button
-          onClick={go}
-          className="prelander-gbtn"
-          style={{ width: "100%", background: "#16a34a", color: "white", fontWeight: 700, fontSize: 16, padding: "16px 24px", borderRadius: 8, border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8, boxShadow: "0 2px 10px rgba(22,163,74,0.3)", marginBottom: 40 }}
+          onClick={handleClick}
+          className="w-full bg-[#128CED] hover:bg-sky-500 text-white font-black text-xl py-5 rounded-sm mb-12 shadow-md flex items-center justify-center gap-2 transition"
         >
-          Find My Rate <ChevronRight style={{ width: 20, height: 20 }} />
+          Find My Rate <ChevronRight className="w-5 h-5" />
         </button>
 
-        {/* ─────────────────────────────────────────
-            US MAP PLACEHOLDER
-            Replace with your <USMap /> component
-        ───────────────────────────────────────── */}
-        <p style={{ textAlign: "center", fontWeight: 700, fontSize: 15, color: "#111827", marginBottom: 14 }}>
-          Or Select Your State
-        </p>
+        {/* ── AGE SLIDER ── */}
+        {/* <section className="mb-12 text-center">
+          <h3 className="text-3xl font-black text-slate-900 mb-2">Check Availability in Your State</h3>
+          <p className="text-slate-600 text-base mb-6">Hover over your state to see where drivers are comparing rates.</p>
+          <AgeSlider onCtaClick={handleClick} />
+        </section> */}
 
-        {/*
-          ╔══════════════════════════════════════╗
-          ║   US MAP PLACEHOLDER                 ║
-          ║   Replace this <div> with:           ║
-          ║   <USMap onClick={go} />             ║
-          ║   (your existing USMap component)    ║
-          ╚══════════════════════════════════════╝
-        */}
-        <div
-          onClick={go}
-          style={{
-            width: "100%", minHeight: 240, border: "2px dashed #93c5fd", borderRadius: 12,
-            background: "#eff6ff", display: "flex", flexDirection: "column", alignItems: "center",
-            justifyContent: "center", cursor: "pointer", marginBottom: 48, transition: "background 0.15s",
-          }}
-          onMouseEnter={e => (e.currentTarget.style.background = "#dbeafe")}
-          onMouseLeave={e => (e.currentTarget.style.background = "#eff6ff")}
-        >
-          <svg style={{ width: 64, height: 64, color: "#93c5fd", marginBottom: 12 }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-          </svg>
-          <p style={{ fontSize: 13, color: "#60a5fa", fontWeight: 700, marginBottom: 4 }}>[ US Map Component ]</p>
-          <p style={{ fontSize: 11, color: "#93c5fd" }}>Replace with your &lt;USMap /&gt; — click navigates to {DESTINATION_URL}</p>
+        {/* ── US MAP PLACEHOLDER ── */}
+        {/* swap with: <USMap /> */}
+        {/* <section className="mb-12 text-center">
+          <h3 className="text-3xl font-black text-slate-900 mb-2">Select Your State</h3>
+          <p className="text-slate-600 text-base mb-6">Click your state to check available rates in your area.</p>
+          <div
+            onClick={handleClick}
+            className="w-full rounded-xl border-2 border-dashed border-sky-300 bg-sky-50 flex flex-col items-center justify-center cursor-pointer transition hover:bg-sky-100"
+            style={{ minHeight: 260 }}
+          >
+            <svg className="w-14 h-14 text-sky-300 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+            </svg>
+            <p className="text-sm text-sky-400 font-bold mb-1">[ US Map Placeholder ]</p>
+            <p className="text-xs text-sky-300">Replace with &lt;USMap /&gt;</p>
+          </div>
+        </section> */}
+        <section className="my-16 text-center">
+                  <h3 className="text-3xl font-black mb-6">
+                    Check Availability in Your State
+                  </h3>
+                  <p className="text-slate-600 text-lg mb-8">
+                    Hover over your state to see where drivers are comparing rates.
+                  </p>
+                  <USMap />
+                </section>
+
+        {/* ── WHY IT MATTERS ── */}
+        <section className="space-y-4 mb-12">
+          <h3 className="text-2xl font-black text-slate-900">Why Comparing Rates Matters</h3>
+          <p className="text-slate-600 text-base leading-relaxed">Many drivers remain with the same insurance provider for years without checking whether their rate is still competitive. It is easy to set a policy on auto renewal and forget about it.</p>
+          <p className="text-slate-600 text-base leading-relaxed">However, insurance companies frequently adjust pricing based on market conditions, driving data, location trends, and other risk factors. A policy that was affordable last year may not be the most cost effective option today.</p>
+          <p className="text-slate-600 text-base leading-relaxed">Even small monthly differences can add up over time. Saving twenty or thirty dollars per month could mean hundreds of dollars kept in your pocket each year.</p>
+          <p className="text-slate-600 text-base font-bold">Reviewing your options only takes a few simple steps:</p>
+          <ul className="list-disc pl-6 text-slate-600 text-base space-y-2">
+            <li>Enter your ZIP code to see what insurers are available near you</li>
+            <li>Answer a few basic questions about your vehicle and driving history</li>
+            <li>View available offers side by side to compare coverage and pricing</li>
+          </ul>
+          <p className="text-slate-600 text-base">
+            There is no obligation to switch providers. To be more informed visit{" "}
+            <a href={DESTINATION_URL} className="text-[#128CED] underline">Otto Savings</a> today.
+          </p>
+        </section>
+
+        {/* ── TESTIMONIALS ── */}
+        <section className="text-center mb-12">
+          <h2 className="text-3xl font-black text-slate-900 mb-8">Testimonials</h2>
+          <div className="grid md:grid-cols-3 gap-5 text-left">
+            {[
+              { text: "I was honestly expecting this to be one of those long, complicated forms. It took me less than 3 minutes and I ended up switching the same day. Just loved it", name: "Daniel Ross", location: "Austin, TX" },
+              { text: "My renewal jumped $47 a month. I took just about 2 minutes to compare on here and switched that same afternoon. I seriously saved over $500 for the year!", name: "Melissa Tanner", location: "Phoenix, AZ" },
+              { text: "Super simple process. No spam calls, no pressure. Just clear options and better pricing than what I was paying.", name: "James Lenning", location: "Orlando, FL" },
+            ].map((item, i) => (
+              <div key={i} className="bg-white shadow-md p-6">
+                <p className="text-slate-600 text-sm mb-3 leading-relaxed">"{item.text}"</p>
+                <p className="text-sm font-bold text-slate-800">
+                  {item.name} <span className="text-slate-500 font-normal">- {item.location}</span>
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── FINAL CTA ── */}
+        <div className="text-center mb-10">
+          <button
+            onClick={handleClick}
+            className="bg-[#128CED] hover:bg-sky-500 text-white font-black px-10 py-4 rounded-sm text-xl transition shadow-lg"
+          >
+            Save your funds now!
+          </button>
+          <p className="text-slate-400 text-base mt-3">Takes 90 seconds • No phone calls • No spam</p>
         </div>
 
       </div>
 
-      {/* ════════════════════════════════════════════
-          FOOTER
-      ════════════════════════════════════════════ */}
-      <footer style={{ borderTop: "1px solid #e5e7eb", background: "#f9fafb", padding: "32px 16px" }}>
-        <div style={{ maxWidth: 620, margin: "0 auto", textAlign: "center" }}>
-          <div className="prelander-serif" style={{ fontSize: 18, fontWeight: 900, color: "#374151", marginBottom: 12 }}>
-            <span style={{ color: "#2563eb" }}>P</span>retected
+      {/* ══════════════════════════════════════════
+          FOOTER — exact HeroSection footer
+      ══════════════════════════════════════════ */}
+      <footer className="bg-gray-900 text-gray-300 pt-14 pb-6 mt-0">
+        <div className="max-w-6xl mx-auto px-8">
+
+          <div className="flex flex-col md:flex-row justify-between gap-10 mb-10">
+            <div className="flex flex-col gap-4 max-w-xs">
+              <img src={logoo} alt="CheckAutoPlans Logo" className="h-10 w-fit" />
+              <p className="text-gray-400 text-base leading-relaxed">
+                Make the right moves for <span className="text-sky-400 font-semibold">your savings.</span>
+              </p>
+              <p className="text-gray-500 text-sm">1343 Main St Suite 705 · Sarasota FL 34236</p>
+              <div className="flex items-center gap-3 mt-1">
+                <div className="bg-white rounded px-2 py-1 flex items-center gap-1">
+                  <span className="text-blue-800 font-black text-xs">BBB</span>
+                  <div className="text-[9px] text-blue-800 leading-tight font-semibold">ACCREDITED<br />BUSINESS</div>
+                </div>
+                <a href="#" className="bg-gray-700 hover:bg-gray-600 rounded p-2 transition">
+                  <svg className="w-5 h-5 text-white fill-current" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+                <a href="#" className="bg-gray-700 hover:bg-gray-600 rounded p-2 transition">
+                  <svg className="w-5 h-5 text-white fill-current" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-10 text-base">
+              <div>
+                <h4 className="text-sky-400 font-bold mb-3 tracking-wide">Insurance Products</h4>
+                <ul className="space-y-2 text-gray-300">
+                  <li><a href={DESTINATION_URL} className="hover:text-white transition">Car Insurance</a></li>
+                  <li><a href="#" className="hover:text-white transition">Home Insurance</a></li>
+                  <li><a href="#" className="hover:text-white transition">Life Insurance</a></li>
+                  <li><a href="#" className="hover:text-white transition">Health Insurance</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-sky-400 font-bold mb-3 tracking-wide">Resources</h4>
+                <ul className="space-y-2 text-gray-300">
+                  <li><a href="#" className="hover:text-white transition">How It Works</a></li>
+                  <li><a href="#" className="hover:text-white transition">Rate Calculator</a></li>
+                  <li><a href="#" className="hover:text-white transition">Coverage Guide</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-sky-400 font-bold mb-3 tracking-wide">Contact Us</h4>
+                <ul className="space-y-2 text-gray-300">
+                  <li><a href="#" className="hover:text-white transition">Facebook</a></li>
+                  <li><a href="#" className="hover:text-white transition">Twitter / X</a></li>
+                  <li><a href="mailto:support@checkautoplans.com" className="hover:text-white transition">Email</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <p style={{ fontSize: 11, color: "#9ca3af", lineHeight: 1.7, maxWidth: 520, margin: "0 auto 16px" }}>
-            This site is not affiliated with any government program. Rates shown are examples only. Actual savings vary by location, driving history, and coverage level. Insurance rates change frequently. This service is 100% free and there is no obligation to purchase.
+
+          <div className="border-t border-gray-700 mb-6" />
+          <p className="text-gray-500 text-sm leading-relaxed mb-6">
+            CheckAutoPlans.com is an independent, advertising-supported comparison website. The products and offers that appear on this website are from third-party insurance partners and advertisers from which CheckAutoPlans.com may receive compensation. This compensation may influence which products we feature, how they are presented, and where they appear on the page. CheckAutoPlans.com is not a licensed insurance provider or broker. Content on this site is provided for informational purposes only and does not constitute insurance advice. Available rates and offers vary by location, driving history, and other factors and are subject to change without notice. Not all products or offers are available in all states.
           </p>
-          <div style={{ display: "flex", justifyContent: "center", gap: 20, fontSize: 11, color: "#9ca3af", marginBottom: 12 }}>
-            {["Privacy Policy", "Terms of Service", "Contact Us"].map(l => (
-              <a key={l} href="#" style={{ color: "#9ca3af", textDecoration: "none" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#2563eb")}
-                onMouseLeave={e => (e.currentTarget.style.color = "#9ca3af")}>
-                {l}
-              </a>
-            ))}
+          <div className="border-t border-gray-700 mb-6" />
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-sm text-gray-500">
+            <p>© {new Date().getFullYear()} Check Auto Plans. All rights reserved.</p>
+            <div className="flex gap-6">
+              <a href="#" className="hover:text-white transition">Privacy Policy</a>
+              <a href="#" className="hover:text-white transition">Terms of Service</a>
+              <a href="#" className="hover:text-white transition">Contact</a>
+            </div>
           </div>
-          <p style={{ fontSize: 11, color: "#d1d5db" }}>© {new Date().getFullYear()} Pretected. All rights reserved.</p>
+
         </div>
       </footer>
 
     </div>
   );
-}
+};
+
+export default Prelander;
