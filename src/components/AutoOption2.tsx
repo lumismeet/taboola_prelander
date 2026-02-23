@@ -9,6 +9,7 @@ import AgeSlider from "./AgeSlider";
 import hero from "../assets/car-lady1.png"
 import img1 from "../assets/car_shocked.png"
 import img2 from "../assets/happy_family.png"
+import bglandscape from "../assets/bg-landscape.png"
 
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
@@ -127,7 +128,7 @@ const Prelander = () => {
           NAVBAR
       ══════════════════════════════════════════ */}
       <div className="sticky top-8 z-40 bg-white shadow-md">
-        <div className="max-w-3xl mx-auto px-6 py-3 flex items-center justify-between">
+        <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-between">
           <img src={logoo} alt="Logo" className="h-10" />
           <button
             onClick={handleClick}
@@ -147,10 +148,11 @@ const Prelander = () => {
       <div className="relative overflow-hidden" style={{ background: "linear-gradient(135deg,#0f172a 0%,#0c3a5e 55%,#0f172a 100%)", minHeight: 220 }}>
 
         {/* ↓ PHOTO PLACEHOLDER — swap this div with your <img> */}
-        <div className="absolute inset-0 m-2 rounded-lg border-2 border-dashed border-white/10 flex items-center justify-center text-white/15 text-xs uppercase tracking-widest">
-          [ Hero Photo Placeholder ]
-        </div>
-
+        {/* <img src={bglandscape} className="absolute inset-0  rounded-lg border-2 border-dashed border-white/10 flex items-center justify-center text-white/15 text-xs uppercase tracking-widest" /> */}
+        <img 
+  src={bglandscape} 
+  className="absolute inset-0 rounded-lg border-2 border-dashed border-white/10"
+/>
         <div className="relative z-10 text-center py-16 px-4 max-w-3xl mx-auto">
           <div className="inline-block bg-amber-400 text-slate-900 text-xs font-black px-3 py-1 rounded-full mb-4 uppercase tracking-widest">
             {currentMonth} Update
