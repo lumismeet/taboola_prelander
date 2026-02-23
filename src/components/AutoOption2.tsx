@@ -6,6 +6,10 @@ import { useVisitorTracking } from "@/hooks/useVisitorTracking";
 import logoo from "../assets/logoauto.png";
 import USMap from "./USMap";
 import AgeSlider from "./AgeSlider";
+import hero from "../assets/car-lady1.png"
+import img1 from "../assets/car_shocked.png"
+import img2 from "../assets/happy_family.png"
+
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 const DESTINATION_URL = "https://auto-savings.com/home.html";
@@ -216,9 +220,7 @@ const Prelander = () => {
 
         {/* ── IMAGE PLACEHOLDER 1 ── */}
         {/* swap with: <img src={img1} alt="Car Insurance" className="w-full h-[300px] object-cover rounded-xl mb-6" /> */}
-        <div className="w-full h-64 rounded-xl mb-6 bg-gray-200 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-xs uppercase tracking-widest font-semibold">
-          [ img1 — car_shocked.png ]
-        </div>
+        <img src={img1} className="w-full h-74 rounded-xl mb-6 bg-gray-200 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-xs uppercase tracking-widest font-semibold" />
 
         {/* ── BODY COPY 1 ── */}
         <p className="text-sm text-slate-600 mb-3 leading-relaxed">Here is the 1 simple truth according to experts:</p>
@@ -372,12 +374,12 @@ const Prelander = () => {
         {/* ── TWO IMAGE PLACEHOLDERS ── */}
         {/* swap with: <img src={hero} className="w-full h-[250px] object-cover" /> etc. */}
         <div className="grid md:grid-cols-2 gap-4 mb-10">
-          <div className="w-full h-52 rounded-xl bg-gray-200 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-xs uppercase tracking-widest font-semibold">
-            [ hero — car-lady1.png ]
-          </div>
-          <div className="w-full h-52 rounded-xl bg-gray-200 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-xs uppercase tracking-widest font-semibold">
-            [ img2 — happy_family.png ]
-          </div>
+          <img src={hero} className="w-full h-72 rounded-xl bg-gray-200 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-xs uppercase tracking-widest font-semibold" />
+            
+          
+          <img src={img2} className="w-full h-72 rounded-xl bg-gray-200 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 text-xs uppercase tracking-widest font-semibold" />
+           
+         
         </div>
 
         {/* ── HOW IT WORKS ── */}
