@@ -150,7 +150,7 @@ const Prelander = () => {
         {/* ↓ PHOTO PLACEHOLDER — swap this div with your <img> */}
         {/* <img src={bglandscape} className="absolute inset-0  rounded-lg border-2 border-dashed border-white/10 flex items-center justify-center text-white/15 text-xs uppercase tracking-widest" /> */}
         <img 
-  src={bglandscape} 
+  src="" 
   className="absolute inset-0 rounded-lg border-2 border-dashed border-white/10"
 />
         <div className="relative z-10 text-center py-16 px-4 max-w-3xl mx-auto">

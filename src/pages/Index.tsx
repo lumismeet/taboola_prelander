@@ -8,12 +8,12 @@ import AutoOptions from "@/components/AutoOption2"
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
-      <HeroSection />
+      {/* <HeroSection /> */}
       {/* <InfoCards /> */}
       {/* <TransitionSection /> */}
       {/* <WhatHappensNext />
       <TrustFooter /> */}
-      {/* <AutoOptions /> */}
+      <AutoOptions />
     </main>
   );
 };
