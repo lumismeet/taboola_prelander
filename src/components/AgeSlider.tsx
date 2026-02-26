@@ -93,7 +93,7 @@ export default function AgeSlider({ onCtaClick }: { onCtaClick: () => void }) {
           className="w-full bg-[#128CED] hover:bg-blue-500 text-white font-black py-4 rounded-sm text-lg transition shadow-md"
         >
           Check My Rate →
-        </button>
+        </button>       
 
         <p className="text-xs text-slate-400">Free • No obligation • No spam calls</p>
       </div>
@@ -110,6 +110,8 @@ export default function AgeSlider({ onCtaClick }: { onCtaClick: () => void }) {
           border: 3px solid white;
           box-shadow: 0 0 0 2px #128CED;
         }
+
+        
         input[type='range']::-moz-range-thumb {
           width: 24px;
           height: 24px;
@@ -119,7 +121,8 @@ export default function AgeSlider({ onCtaClick }: { onCtaClick: () => void }) {
           border: 3px solid white;
           box-shadow: 0 0 0 2px #128CED;
         }
-      `}</style>
+      `
+      }</style>
     </section>
   );
 }
