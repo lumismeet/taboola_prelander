@@ -10,14 +10,14 @@ import AutoOPtions3 from "@/components/AutoOption4"
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
-      {/* <HeroSection /> */}
+      <HeroSection />
       {/* <InfoCards /> */}
       {/* <TransitionSection /> */}
       {/* <WhatHappensNext />
       <TrustFooter /> */}
       {/* <AutoOptions /> */}
       {/* <AutoOPtions2/> */}
-      <AutoOPtions3/>
+      {/* <AutoOPtions3/> */}
     </main>
   );
 };

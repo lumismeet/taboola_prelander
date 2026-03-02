@@ -72,6 +72,7 @@ export default function Prelander() {
 
   const handleCTA = () => {
     window.location.href = DESTINATION_URL;
+
   };
 
   return (

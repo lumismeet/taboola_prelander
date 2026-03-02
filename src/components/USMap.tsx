@@ -62,10 +62,6 @@ export default function USMap() {
   }
 }}
       >
-      
-
-
-  
 
   <path
       
