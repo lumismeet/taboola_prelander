@@ -6,18 +6,21 @@ import TrustFooter from "@/components/TrustFooter";
 import AutoOptions from "@/components/AutoOption2"
 import AutoOPtions2 from "@/components/AutoOption3"
 import AutoOPtions3 from "@/components/AutoOption4"
+import AutoOption_andres from "@/components/AutoOption_andres";
 
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
-      <HeroSection />
+      {/* <HeroSection /> */}
+      <AutoOption_andres/>
+      {/* <AutoOPtions3/> */}
+      {/* <AutoOptions /> */}
       {/* <InfoCards /> */}
       {/* <TransitionSection /> */}
       {/* <WhatHappensNext />
       <TrustFooter /> */}
-      {/* <AutoOptions /> */}
       {/* <AutoOPtions2/> */}
-      {/* <AutoOPtions3/> */}
+
     </main>
   );
 };

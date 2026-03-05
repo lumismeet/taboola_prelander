@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { useVisitorTracking } from "@/hooks/useVisitorTracking";
 const DESTINATION_URL = "https://auto-savings.com/home.html";
 
 
@@ -243,6 +243,7 @@ function ReasonCard({ reason, index, isUnlocked, onUnlock }) {
 }
 
 export default function Prelander() {
+  const { trackCtaClick } = useVisitorTracking();
   const [unlocked, setUnlocked] = useState(new Set([1]));
   const [score, setScore] = useState(50);
   const [streak, setStreak] = useState(1);
@@ -271,6 +272,7 @@ export default function Prelander() {
   };
 
   const handleCTA = () => {
+    trackCtaClick();
     window.location.href = DESTINATION_URL;
   };
 
