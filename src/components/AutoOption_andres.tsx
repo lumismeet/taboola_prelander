@@ -276,11 +276,16 @@ const Prelander = () => {
             Once drivers saw exactly how their profile was priced across competing carriers, something clicked.
             The process felt less like "shopping" and more like simply seeing what was already out there for them.
           </p>
+          <div className="my-6">
+            <CtaButton />
+          </div>
 
           {/* H2 */}
           <h2 className="andres-h2">
             Why Two Drivers With <span className="andres-highlight">Identical Records</span> Pay Very Different Rates
           </h2>
+
+          
 
           <p className="andres-p">
             Every insurer builds its own pricing model — a proprietary formula that weighs your driving history, your ZIP code's claims trends,
