@@ -1,28 +1,21 @@
-import HeroSection from "@/components/HeroSection";
-import InfoCards from "@/components/InfoCards";
-import TransitionSection from "@/components/TransitionSection";
-import WhatHappensNext from "@/components/WhatHappensNext";
-import TrustFooter from "@/components/TrustFooter";
-import AutoOptions from "@/components/AutoOption2"
-import AutoOPtions2 from "@/components/AutoOption3"
-import AutoOPtions3 from "@/components/AutoOption4"
-import AutoOption_andres from "@/components/AutoOption_andres";
+import { Routes, Route } from "react-router-dom";
 
-const Index = () => {
+import HeroSection from "@/components/HeroSection";
+import AutoOptions from "@/components/AutoOption2";
+import AutoOptions2 from "@/components/AutoOption3";
+import AutoOptions3 from "@/components/AutoOption4";
+import AutoOptionAndres from "@/components/AutoOption_andres";
+
+export default function App() {
   return (
     <main className="min-h-screen bg-background">
-      {/* <HeroSection /> */}
-      <AutoOption_andres/>
-      {/* <AutoOPtions3/> */}
-      {/* <AutoOptions /> */}
-      {/* <InfoCards /> */}
-      {/* <TransitionSection /> */}
-      {/* <WhatHappensNext />
-      <TrustFooter /> */}
-      {/* <AutoOPtions2/> */}
-
+      <Routes>
+        <Route path="/" element={<HeroSection />} />
+        <Route path="/v1" element={<AutoOptionAndres />} />
+        <Route path="/v2" element={<AutoOptions3 />} />
+        <Route path="/v3" element={<AutoOptions />} />
+        <Route path="/v4" element={<AutoOptions2 />} />
+      </Routes>
     </main>
   );
-};
-
-export default Index;
+}
