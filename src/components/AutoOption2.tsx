@@ -13,7 +13,7 @@ import bglandscape from "../assets/bg-landscape.png"
 
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
-const DESTINATION_URL = "https://auto-savings.com/home.html";
+const DESTINATION_URL = "https://f.ottoinsurance.com/auto/insurance";
 const AGE_RANGES = ["16 - 25", "26 - 35", "36 - 45", "46 - 55", "56 - 65", "66 +"];
 const CARRIERS = ["Liberty Mutual", "Progressive", "The Hartford", "Direct", "Kemper"];
 const getCurrentMonth = () => new Date().toLocaleString("en-US", { month: "long" });
@@ -59,36 +59,6 @@ const Prelander = () => {
   const currentMonth = getCurrentMonth();
 
   // ── Reusable ZIP row ──────────────────────────────────────────────────────
-  const ZipRow = ({ dark = false }: { dark?: boolean }) => (
-    <div>
-      <div className="flex gap-2">
-        <div className="relative flex-1">
-          <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input
-            type="text"
-            value={zip}
-        
-            onKeyDown={e => e.key === "Enter" && handleZip()}
-            placeholder="Enter ZIP Code"
-            maxLength={5}
-            className={[
-              "prel-zip w-full rounded-md pl-9 pr-3 py-3 text-sm border transition",
-              dark
-                ? "bg-gray-800 border-gray-600 text-white placeholder:text-gray-500"
-                : "bg-white border-gray-300 text-gray-900",
-            ].join(" ")}
-          />
-        </div>
-        <button
-          onClick={handleClick}
-          className="bg-[#128CED] hover:bg-sky-500 text-white font-bold px-5 py-3 rounded-md text-sm flex items-center gap-1.5 whitespace-nowrap shadow transition"
-        >
-          GET RATES <ChevronRight className="w-4 h-4" />
-        </button>
-      </div>
-      {zipError && <p className="text-red-500 text-xs mt-1">{zipError}</p>}
-    </div>
-  );
 
   return (
     <div className="min-h-screen bg-gray-100 text-slate-800" style={{ fontFamily: "'Source Sans 3', Arial, sans-serif" }}>
@@ -192,7 +162,29 @@ const Prelander = () => {
             Insurance rates change constantly. Find out if you're eligible for lower premiums from leading providers.
           </p>
 
-          <ZipRow />
+          <div>
+            <div className="flex gap-2">
+              <div className="relative flex-1">
+                <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input
+                  type="text"
+                  value={zip}
+                  onChange={e => setZip(e.target.value)}
+                  onKeyDown={e => e.key === "Enter" && handleZip()}
+                  placeholder="Enter ZIP Code"
+                  maxLength={5}
+                  className="prel-zip w-full rounded-md pl-9 pr-3 py-3 text-sm border transition bg-white border-gray-300 text-gray-900"
+                />
+              </div>
+              <button
+                onClick={handleClick}
+                className="bg-[#128CED] hover:bg-sky-500 text-white font-bold px-5 py-3 rounded-md text-sm flex items-center gap-1.5 whitespace-nowrap shadow transition"
+              >
+                GET RATES <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+            {zipError && <p className="text-red-500 text-xs mt-1">{zipError}</p>}
+          </div>
 
           <div className="flex flex-wrap gap-4 mt-3 text-xs text-gray-500">
             <div className="flex items-center gap-1"><CheckCircle className="w-3.5 h-3.5 text-green-500" /> 100% Free</div>

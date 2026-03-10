@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useVisitorTracking } from "@/hooks/useVisitorTracking";
-const DESTINATION_URL = "https://auto-savings.com/home.html";
+const DESTINATION_URL = "https://f.ottoinsurance.com/auto/insurance";
 
 
 const reasons = [

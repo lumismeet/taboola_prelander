@@ -14,7 +14,6 @@ const getOrCreateVisitorId = (): string => {
 
 export const useVisitorTracking = () => {
   const visitorId = getOrCreateVisitorId();
-
   const trackEvent = useCallback(
     async (eventType: "page_view" | "cta_click") => {
       try {

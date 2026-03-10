@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useVisitorTracking } from "@/hooks/useVisitorTracking";
 
 export default function USMap() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const { trackCtaClick } = useVisitorTracking();
 
   return (
     <div className="relative w-full flex justify-center">
@@ -58,7 +60,8 @@ export default function USMap() {
         onClick={(e) => {
   const target = e.target as SVGPathElement;
   if (target.tagName === "path") {
-    window.location.href = "https://auto-savings.com/home.html";
+    trackCtaClick();
+    window.location.href = "https://f.ottoinsurance.com/auto/insurance";
   }
 }}
       >

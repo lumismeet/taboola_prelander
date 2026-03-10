@@ -22,13 +22,19 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<Index />} />
-          <Route path="/dashboard" element={<Dashboard />} /> */}
-          {/* <Route path="*" element={<NotFound />} /> */}
-          <Route path="/" element={<HeroSection />} />
+        {/* Main one */}
+        <Route path="/" element={<HeroSection />} />
+
+        {/* Andres' version */}
         <Route path="/v1" element={<AutoOptionAndres />} />
+
+        {/* 10 things to know about auto insurance */}
         <Route path="/v2" element={<AutoOptions3 />} />
+
+        {/* A different kind of prelander */}
         <Route path="/v3" element={<AutoOptions />} />
+        
+        {/* Not important */}
         <Route path="/v4" element={<AutoOptions2 />} />
         </Routes>
       </BrowserRouter>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useVisitorTracking } from "@/hooks/useVisitorTracking";
 import logoo from "../assets/logoauto.png";
 import hero1 from "../assets/car-lady1.png";
 import hero2 from "../assets/car_shocked.png";
@@ -13,12 +14,15 @@ import heron5 from "../assets/creativen5.png";
 import USMap from "./USMap";
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
-const DESTINATION_URL = "https://auto-savings.com/home.html";
+const DESTINATION_URL = "https://f.ottoinsurance.com/auto/insurance";
 
 // ─── MAIN ────────────────────────────────────────────────────────────────────
 const Prelander = () => {
 
+  const { trackCtaClick } = useVisitorTracking();
+
   const handleClick = () => {
+    trackCtaClick();
     window.location.href = DESTINATION_URL;
   };
 

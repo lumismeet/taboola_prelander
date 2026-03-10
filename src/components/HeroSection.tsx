@@ -10,7 +10,7 @@ import img2 from "../assets/happy_family.png"
 import { useState, useEffect } from "react";
 import AgeSlider from "./AgeSlider";
 
-const DESTINATION_URL = "https://auto-savings.com/home.html";
+const DESTINATION_URL = "https://f.ottoinsurance.com/auto/insurance";
 
 const getCurrentMonth = () => {
   return new Date().toLocaleString("en-US", { month: "long" });
