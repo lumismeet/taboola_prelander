@@ -589,9 +589,9 @@ onMouseLeave={e => e.currentTarget.style.background = "#128CED"}
             <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 12, fontSize: 13, color: "#6b7280" }}>
               <p>© {new Date().getFullYear()} Check Auto Plans. All rights reserved.</p>
               <div style={{ display: "flex", gap: 20 }}>
-                {["Privacy Policy", "Terms of Service", "Contact"].map((l) => (
-                  <a key={l} href="#" style={{ color: "#9ca3af", textDecoration: "none" }}>{l}</a>
-                ))}
+                <a href="/privacy/policy" target="_blank" rel="noopener noreferrer" style={{ color: "#9ca3af", textDecoration: "none" }}>Privacy Policy</a>
+                <a href="/privacy/terms" target="_blank" rel="noopener noreferrer" style={{ color: "#9ca3af", textDecoration: "none" }}>Terms of Use</a>
+                <a href="#" style={{ color: "#9ca3af", textDecoration: "none" }}>Contact</a>
               </div>
             </div>
           </div>

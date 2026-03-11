@@ -579,8 +579,8 @@ const Prelander = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-3 text-sm text-gray-500">
             <p>© {new Date().getFullYear()} Check Auto Plans. All rights reserved.</p>
             <div className="flex gap-6">
-              <a href="#" className="hover:text-white transition">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition">Terms of Service</a>
+              <a href="/privacy/policy" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Privacy Policy</a>
+              <a href="/privacy/terms" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Terms of Use</a>
               <a href="#" className="hover:text-white transition">Contact</a>
             </div>
           </div>
