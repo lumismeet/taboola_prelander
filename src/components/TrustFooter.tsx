@@ -23,6 +23,26 @@ const TrustFooter = () => {
         <p className="text-center text-subtle text-xs leading-relaxed max-w-sm mx-auto">
           We may connect you with insurance partners based on your selection.
         </p>
+
+        {/* Legal links */}
+        <div className="flex justify-center gap-4 mt-4">
+          <a
+            href="/privacy/policy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-subtle underline hover:text-foreground transition-colors"
+          >
+            Privacy Policy
+          </a>
+          <a
+            href="/privacy/terms"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-subtle underline hover:text-foreground transition-colors"
+          >
+            Terms of Use
+          </a>
+        </div>
       </div>
     </footer>
   );
