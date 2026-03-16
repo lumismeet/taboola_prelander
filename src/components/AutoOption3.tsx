@@ -1,6 +1,16 @@
 import { useState, useEffect } from "react";
 import { useVisitorTracking } from "@/hooks/useVisitorTracking";
-const DESTINATION_URL = "https://f.ottoinsurance.com/auto/insurance";
+const getDestinationURL = () => {
+  const params = new URLSearchParams(window.location.search);
+  const transactionid = params.get("transactionid") || "";
+  const affiliateid = params.get("affiliateid") || "";
+  console.log("[Affise] transactionid:", transactionid, "| affiliateid:", affiliateid);
+  const url = new URL("https://f.ottoinsurance.com/auto/insurance");
+  if (transactionid) url.searchParams.set("s1", transactionid);
+  if (affiliateid) url.searchParams.set("s2", affiliateid);
+  console.log("[Affise] destination URL:", url.toString());
+  return url.toString();
+};
 
 
 const reasons = [
@@ -273,7 +283,7 @@ export default function Prelander() {
 
   const handleCTA = () => {
     trackCtaClick();
-    window.location.href = DESTINATION_URL;
+    window.location.href = getDestinationURL();
   };
 
   return (
@@ -572,7 +582,7 @@ onMouseLeave={e => e.currentTarget.style.background = "#128CED"}
                     <div style={{ color: "#38bdf8", fontWeight: 700, fontSize: 13, letterSpacing: 1, marginBottom: 12 }}>{col.heading}</div>
                     <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
                       {col.links.map((l) => (
-                        <li key={l}><a href={DESTINATION_URL} style={{ color: "#d1d5db", textDecoration: "none", fontSize: 14 }}>{l}</a></li>
+                        <li key={l}><a href={getDestinationURL()} style={{ color: "#d1d5db", textDecoration: "none", fontSize: 14 }}>{l}</a></li>
                       ))}
                     </ul>
                   </div>

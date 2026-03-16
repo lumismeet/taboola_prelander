@@ -1,6 +1,16 @@
 import { useState, useEffect } from "react";
 
-const DESTINATION_URL = "https://auto-savings.com/home.html";
+const getDestinationURL = () => {
+  const params = new URLSearchParams(window.location.search);
+  const transactionid = params.get("transactionid") || "";
+  const affiliateid = params.get("affiliateid") || "";
+  console.log("[Affise] transactionid:", transactionid, "| affiliateid:", affiliateid);
+  const url = new URL("https://f.ottoinsurance.com/auto/insurance");
+  if (transactionid) url.searchParams.set("s1", transactionid);
+  if (affiliateid) url.searchParams.set("s2", affiliateid);
+  console.log("[Affise] destination URL:", url.toString());
+  return url.toString();
+};
 
 const getCurrentMonth = () =>
   new Date().toLocaleString("en-US", { month: "long" });
@@ -71,7 +81,7 @@ export default function Prelander() {
   }, []);
 
   const handleCTA = () => {
-    window.location.href = DESTINATION_URL;
+    window.location.href = getDestinationURL();
 
   };
 
@@ -188,7 +198,7 @@ export default function Prelander() {
         </p>
         <p style={{ fontSize: 16, color: "#475569", lineHeight: 1.85, marginBottom: 48 }}>
           The process is designed to be simple and completely online. Enter your ZIP code, answer a few quick questions, and see available offers side by side.{" "}
-          <a href={DESTINATION_URL} style={{ color: "#128CED", textDecoration: "underline" }}>
+          <a href={getDestinationURL()} style={{ color: "#128CED", textDecoration: "underline" }}>
             Get started at Otto Savings →
           </a>
         </p>
@@ -251,7 +261,7 @@ export default function Prelander() {
                   <div style={{ color: "#38bdf8", fontWeight: 700, fontSize: 13, letterSpacing: 1, marginBottom: 12 }}>{col.heading}</div>
                   <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
                     {col.links.map((l) => (
-                      <li key={l}><a href={DESTINATION_URL} style={{ color: "#d1d5db", textDecoration: "none", fontSize: 14 }}>{l}</a></li>
+                      <li key={l}><a href={getDestinationURL()} style={{ color: "#d1d5db", textDecoration: "none", fontSize: 14 }}>{l}</a></li>
                     ))}
                   </ul>
                 </div>

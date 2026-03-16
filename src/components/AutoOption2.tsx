@@ -13,7 +13,17 @@ import bglandscape from "../assets/bg-landscape.png"
 
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
-const DESTINATION_URL = "https://f.ottoinsurance.com/auto/insurance";
+const getDestinationURL = () => {
+  const params = new URLSearchParams(window.location.search);
+  const transactionid = params.get("transactionid") || "";
+  const affiliateid = params.get("affiliateid") || "";
+  console.log("[Affise] transactionid:", transactionid, "| affiliateid:", affiliateid);
+  const url = new URL("https://f.ottoinsurance.com/auto/insurance");
+  if (transactionid) url.searchParams.set("s1", transactionid);
+  if (affiliateid) url.searchParams.set("s2", affiliateid);
+  console.log("[Affise] destination URL:", url.toString());
+  return url.toString();
+};
 const AGE_RANGES = ["16 - 25", "26 - 35", "36 - 45", "46 - 55", "56 - 65", "66 +"];
 const CARRIERS = ["Liberty Mutual", "Progressive", "The Hartford", "Direct", "Kemper"];
 const getCurrentMonth = () => new Date().toLocaleString("en-US", { month: "long" });
@@ -39,7 +49,7 @@ const Prelander = () => {
 
   const handleClick = () => {
     trackCtaClick();
-    window.location.href = DESTINATION_URL;
+    window.location.href = getDestinationURL();
   };
 
   const handleZip = () => {
@@ -230,7 +240,7 @@ const Prelander = () => {
 
         <p className="text-sm text-slate-600 leading-relaxed mb-8">
           Then you may qualify for massive auto insurance discounts. If you have not had a traffic ticket in the last 3 years or do not have a DUI on your record, you may get an even larger discount and{" "}
-          <a href={DESTINATION_URL} className="font-bold underline text-[#128CED]">save up to $500 a year.</a>
+          <a href={getDestinationURL()} className="font-bold underline text-[#128CED]">save up to $500 a year.</a>
         </p>
 
         {/* ── H2 ── */}
@@ -290,7 +300,7 @@ const Prelander = () => {
         {/* ── BODY COPY 2 ── */}
         <p className="text-sm text-slate-600 leading-relaxed mb-3">
           When people go to trusted sites like{" "}
-          <a href={DESTINATION_URL} className="font-bold underline text-[#128CED]">this</a>,
+          <a href={getDestinationURL()} className="font-bold underline text-[#128CED]">this</a>,
           in 60 seconds they get a clear view of the best available rates in their area, including all discounts from multiple companies. You can even get rates as low as $19* a month! (* Average expenditure $89/mo).
         </p>
         <p className="text-sm text-slate-600 leading-relaxed mb-8">
@@ -361,7 +371,7 @@ const Prelander = () => {
           </p>
           <p className="text-slate-600 text-base leading-relaxed">
             Checking rates online is free and does not require you to make any immediate changes. Click on{" "}
-            <a href={DESTINATION_URL} className="text-[#128CED] underline">Otto Savings</a> to get started.
+            <a href={getDestinationURL()} className="text-[#128CED] underline">Otto Savings</a> to get started.
           </p>
         </section>
 
@@ -391,7 +401,7 @@ const Prelander = () => {
             <p>No long phone calls.</p>
             <p>No pressure to switch.</p>
             <p>No obligation to purchase anything.</p>
-            <p>Just a fast and simple way to see what is currently available near you. Click here <a href={DESTINATION_URL} className="text-[#128CED] underline">Otto Savings</a> to get the best deals!</p>
+            <p>Just a fast and simple way to see what is currently available near you. Click here <a href={getDestinationURL()} className="text-[#128CED] underline">Otto Savings</a> to get the best deals!</p>
           </div>
         </section>
 
@@ -401,7 +411,7 @@ const Prelander = () => {
         </h2>
         <p className="text-sm text-slate-600 leading-relaxed mb-2">
           <strong>Step 1: </strong>
-          <a href={DESTINATION_URL} className="font-semibold underline text-[#128CED]">Click your age below to instantly get your rate online.</a>
+          <a href={getDestinationURL()} className="font-semibold underline text-[#128CED]">Click your age below to instantly get your rate online.</a>
         </p>
         <p className="text-sm text-slate-600 leading-relaxed mb-8">
           <strong>Step 2: </strong> Once you enter your zip code and go through a few questions, you will have the opportunity to check the cheapest rates and save up to $500 a year.
@@ -475,7 +485,7 @@ const Prelander = () => {
           </ul>
           <p className="text-slate-600 text-base">
             There is no obligation to switch providers. To be more informed visit{" "}
-            <a href={DESTINATION_URL} className="text-[#128CED] underline">Otto Savings</a> today.
+            <a href={getDestinationURL()} className="text-[#128CED] underline">Otto Savings</a> today.
           </p>
         </section>
 
@@ -546,7 +556,7 @@ const Prelander = () => {
               <div>
                 <h4 className="text-sky-400 font-bold mb-3 tracking-wide">Insurance Products</h4>
                 <ul className="space-y-2 text-gray-300">
-                  <li><a href={DESTINATION_URL} className="hover:text-white transition">Car Insurance</a></li>
+                  <li><a href={getDestinationURL()} className="hover:text-white transition">Car Insurance</a></li>
                   <li><a href="#" className="hover:text-white transition">Home Insurance</a></li>
                   <li><a href="#" className="hover:text-white transition">Life Insurance</a></li>
                   <li><a href="#" className="hover:text-white transition">Health Insurance</a></li>
