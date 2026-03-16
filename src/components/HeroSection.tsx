@@ -10,7 +10,17 @@ import img2 from "../assets/happy_family.png"
 import { useState, useEffect } from "react";
 import AgeSlider from "./AgeSlider";
 
-const DESTINATION_URL = "https://f.ottoinsurance.com/auto/insurance";
+const getDestinationURL = () => {
+  const params = new URLSearchParams(window.location.search);
+  const transactionid = params.get("transactionid") || "";
+  const affiliateid = params.get("affiliateid") || "";
+  console.log("[Affise] transactionid:", transactionid, "| affiliateid:", affiliateid);
+  const url = new URL("https://f.ottoinsurance.com/auto/insurance");
+  if (transactionid) url.searchParams.set("s1", transactionid);
+  if (affiliateid) url.searchParams.set("s2", affiliateid);
+  console.log("[Affise] destination URL:", url.toString());
+  return url.toString();
+};
 
 const getCurrentMonth = () => {
   return new Date().toLocaleString("en-US", { month: "long" });
@@ -32,7 +42,7 @@ const HeroSection = () => {
 
   const handleClick = () => {
     trackCtaClick();
-    window.location.href = DESTINATION_URL;
+    window.location.href = getDestinationURL();
   };
 
   const currentMonth = getCurrentMonth();
@@ -365,7 +375,7 @@ const HeroSection = () => {
               <div>
                 <h4 className="text-sky-400 font-bold mb-3 tracking-wide">Insurance Products</h4>
                 <ul className="space-y-2 text-gray-300">
-                  <li><a href={DESTINATION_URL} className="hover:text-white transition">Car Insurance</a></li>
+                  <li><a href={getDestinationURL()} className="hover:text-white transition">Car Insurance</a></li>
                   <li><a href="#" className="hover:text-white transition">Home Insurance</a></li>
                   <li><a href="#" className="hover:text-white transition">Life Insurance</a></li>
                   <li><a href="#" className="hover:text-white transition">Health Insurance</a></li>
