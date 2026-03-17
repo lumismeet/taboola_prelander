@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useVisitorTracking } from "@/hooks/useVisitorTracking";
+import logoo from "../assets/logoauto.png";
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 const getDestinationURL = () => {
@@ -83,7 +84,7 @@ const Andres_prelander = () => {
           {/* Header */}
           <section className="par-v4-header">
             <div className="par-v4-header-wrapper">
-              <img loading="lazy" src="/images/logo-placeholder.svg" alt="" className="image-2" />
+              <img loading="lazy" src={logoo} alt="CheckAutoPlans" className="image-2" />
             </div>
           </section>
 
