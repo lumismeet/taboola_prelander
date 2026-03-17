@@ -51,7 +51,6 @@ const HeroSection = () => {
 
   return (
     <div className="bg-gray-100 text-slate-800">
-
       {/* URGENCY BAR */}
       <div className="bg-amber-400 text-slate-900 text-center text-base font-bold py-2 px-4 sticky top-0 z-50">
         ⚠️ Rates in {stateName || "your area"} were updated today —{" "}
