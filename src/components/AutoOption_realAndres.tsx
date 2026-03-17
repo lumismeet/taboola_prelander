@@ -21,6 +21,8 @@ const Andres_prelander = () => {
 
   const handleClick = () => {
     trackCtaClick();
+    // @ts-ignore
+    if (typeof _tfa !== "undefined") _tfa.push({ notify: 'event', name: 'other', id: 2007154 });
     window.location.href = getDestinationURL();
   };
 
