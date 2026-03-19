@@ -53,8 +53,21 @@ export const useVisitorTracking = () => {
   }, [trackEvent]);
 
   const trackCtaClick = useCallback(() => {
-    trackEvent('cta_click');
-  }, [trackEvent]);
+    const visitorId = getOrCreateVisitorId();
+    navigator.sendBeacon(
+      "https://dfkdpevscwylkzllxupx.supabase.co/functions/v1/track-events",
+      new Blob(
+        [JSON.stringify({
+          visitor_id: visitorId,
+          event_type: "cta_click",
+          page_url: window.location.href,
+          referrer: document.referrer || null,
+          user_agent: navigator.userAgent,
+        })],
+        { type: "application/json" }
+      )
+    );
+  }, []);
 
   // Track page view on mount
   useEffect(() => {
