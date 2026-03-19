@@ -61,7 +61,14 @@ export default function USMap() {
   const target = e.target as SVGPathElement;
   if (target.tagName === "path") {
     trackCtaClick();
-    window.location.href = "https://f.ottoinsurance.com/auto/insurance";
+    // @ts-ignore
+    if (typeof _tfa !== "undefined") _tfa.push({ notify: 'event', name: 'other', id: 2007154 });
+    const params = new URLSearchParams(window.location.search);
+    const url = new URL("https://l.auto-savings.com/auto");
+    url.searchParams.set("affid", "13152");
+    const t = params.get("transactionid"); if (t) url.searchParams.set("s1", t);
+    const a = params.get("affiliateid"); if (a) url.searchParams.set("s2", a);
+    window.location.href = url.toString();
   }
 }}
       >

@@ -1,11 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Clock } from "lucide-react";
 
-const DESTINATION_URL = "https://auto-savings.com/home.html";
+const getDestinationURL = () => {
+  const params = new URLSearchParams(window.location.search);
+  const url = new URL("https://l.auto-savings.com/auto");
+  url.searchParams.set("affid", "13152");
+  const t = params.get("transactionid"); if (t) url.searchParams.set("s1", t);
+  const a = params.get("affiliateid"); if (a) url.searchParams.set("s2", a);
+  return url.toString();
+};
 
 const TransitionSection = () => {
   const handleClick = () => {
-    window.location.href = DESTINATION_URL;
+    // @ts-ignore
+    if (typeof _tfa !== "undefined") _tfa.push({ notify: 'event', name: 'other', id: 2007154 });
+    window.location.href = getDestinationURL();
   };
 
   return (

@@ -14,11 +14,10 @@ const getDestinationURL = () => {
   const params = new URLSearchParams(window.location.search);
   const transactionid = params.get("transactionid") || "";
   const affiliateid = params.get("affiliateid") || "";
-  console.log("[Affise] transactionid:", transactionid, "| affiliateid:", affiliateid);
-  const url = new URL("https://f.ottoinsurance.com/auto/insurance");
+  const url = new URL("https://l.auto-savings.com/auto");
+  url.searchParams.set("affid", "13152");
   if (transactionid) url.searchParams.set("s1", transactionid);
   if (affiliateid) url.searchParams.set("s2", affiliateid);
-  console.log("[Affise] destination URL:", url.toString());
   return url.toString();
 };
 
