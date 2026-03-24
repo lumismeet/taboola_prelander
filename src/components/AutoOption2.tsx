@@ -21,6 +21,8 @@ const getDestinationURL = () => {
   url.searchParams.set("affid", "13152");
   if (transactionid) url.searchParams.set("s1", transactionid);
   if (affiliateid) url.searchParams.set("s2", affiliateid);
+  const tblci = window.location.hash.replace("#", "");
+  if (tblci) url.searchParams.set("tblci", tblci);
   return url.toString();
 };
 const AGE_RANGES = ["16 - 25", "26 - 35", "36 - 45", "46 - 55", "56 - 65", "66 +"];
