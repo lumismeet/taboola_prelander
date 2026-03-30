@@ -11,7 +11,9 @@ const getDestinationURL = () => {
   url.searchParams.set("affid", "13152");
   if (transactionid) url.searchParams.set("s1", transactionid);
   if (affiliateid) url.searchParams.set("s2", affiliateid);
-  const tblci = params.get("taboola_clickid") || "";
+  const tblciFromParam = params.get("taboola_clickid");
+  if (tblciFromParam) localStorage.setItem("tblci", tblciFromParam);
+  const tblci = tblciFromParam || localStorage.getItem("tblci") || "";
   if (tblci) url.searchParams.set("tblci", tblci);
   return url.toString();
 };
@@ -50,6 +52,14 @@ const Andres_prelander = () => {
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
       <body className="body-3 new-bk-col">
+        {/* Full-width Sticky Header */}
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999, backgroundColor: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.12)", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 24px" }}>
+          <img loading="lazy" src={logoo} alt="CheckAutoPlans" style={{ height: 40 }} />
+          <button onClick={handleClick} style={{ backgroundColor: "#00b67a", border: "none", borderRadius: 8, padding: "14px 28px", fontWeight: 900, cursor: "pointer", fontSize: 17, color: "#fff", boxShadow: "0 4px 15px rgba(0,182,122,0.5)", letterSpacing: "0.3px" }}>
+            👉 Compare Rates Now, It's Free!
+          </button>
+        </div>
+
         {/* Inline styles from original HTML */}
         <div className="w-embed">
           <style>{`
@@ -80,16 +90,18 @@ const Andres_prelander = () => {
               border-color: #FFC700;
               box-shadow: none;
             }
+            .tgl-cta-btn-3.new-space.new-cta-col {
+              font-size: 26px !important;
+              padding-top: 1.2em !important;
+              padding-bottom: 1.2em !important;
+              border-radius: 10px !important;
+              box-shadow: 0 6px 20px rgba(0,182,122,0.45);
+              letter-spacing: 0.5px;
+            }
           `}</style>
         </div>
 
-        <div className="par-v4-body-wrapper pad-mar-adj">
-          {/* Header */}
-          <section className="par-v4-header">
-            <div className="par-v4-header-wrapper">
-              <img loading="lazy" src={logoo} alt="CheckAutoPlans" className="image-2" />
-            </div>
-          </section>
+        <div className="par-v4-body-wrapper pad-mar-adj" style={{ paddingTop: 64 }}>
 
           {/* Main content */}
           <section className="par-v4-content-2 new-width-1">
@@ -172,6 +184,11 @@ const Andres_prelander = () => {
                     fewer than 1 in 4 consumers had done so.
                   </strong>
                 </p>
+
+                <button onClick={handleClick} className="tgl-cta-btn-3 new-space new-cta-col w-button">
+                  <strong className="bold-text-16 mobile-text">👉 Compare Rates Now</strong>
+                </button>
+
                 <p className="par-v4-p-2">
                   What many drivers did not realize is that insurance rates are recalculated continuously based on broader
                   factors: regional claims data, repair costs, accident trends, and proprietary underwriting models. Even if
@@ -274,6 +291,10 @@ const Andres_prelander = () => {
                   differently providers evaluated the same information, many said they felt better equipped to make an informed
                   decision at renewal.
                 </p>
+
+                <button onClick={handleClick} className="tgl-cta-btn-3 new-space new-cta-col w-button">
+                  <strong className="bold-text-16 mobile-text">👉 Compare Rates Now</strong>
+                </button>
 
                 <h2 className="par-v4-h top-mar">
                   <strong className="bold-text-20">Why </strong>

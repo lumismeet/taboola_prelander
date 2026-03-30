@@ -18,7 +18,9 @@ const getDestinationURL = () => {
   url.searchParams.set("affid", "13152");
   if (transactionid) url.searchParams.set("s1", transactionid);
   if (affiliateid) url.searchParams.set("s2", affiliateid);
-  const tblci = params.get("taboola_clickid") || "";
+  const tblciFromParam = params.get("taboola_clickid");
+  if (tblciFromParam) localStorage.setItem("tblci", tblciFromParam);
+  const tblci = tblciFromParam || localStorage.getItem("tblci") || "";
   if (tblci) url.searchParams.set("tblci", tblci);
   return url.toString();
 };

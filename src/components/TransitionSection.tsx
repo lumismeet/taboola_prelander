@@ -7,7 +7,9 @@ const getDestinationURL = () => {
   url.searchParams.set("affid", "13152");
   const t = params.get("transactionid"); if (t) url.searchParams.set("s1", t);
   const a = params.get("affiliateid"); if (a) url.searchParams.set("s2", a);
-  const tblci = params.get("taboola_clickid") || "";
+  const tblciFromParam = params.get("taboola_clickid");
+  if (tblciFromParam) localStorage.setItem("tblci", tblciFromParam);
+  const tblci = tblciFromParam || localStorage.getItem("tblci") || "";
   if (tblci) url.searchParams.set("tblci", tblci);
   return url.toString();
 };
