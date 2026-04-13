@@ -54,6 +54,11 @@ const HeroSection = () => {
 
   return (
     <div className="bg-gray-100 text-slate-800">
+      {/* ADVERTORIAL LABEL */}
+      <div className="bg-white text-slate-500 text-center text-xs font-semibold py-1 px-4 border-b border-slate-200">
+        Advertorial
+      </div>
+
       {/* URGENCY BAR */}
       <div className="bg-amber-400 text-slate-900 text-center text-base font-bold py-2 px-4 sticky top-0 z-50">
         ⚠️ Rates in {stateName || "your area"} were updated today —{" "}
