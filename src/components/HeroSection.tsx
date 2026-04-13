@@ -90,7 +90,7 @@ const HeroSection = () => {
           </h1>
 
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-700 mb-4">
-            Most drivers stick with the same insurer for years without checking if they're overpaying
+            Most drivers renew automatically without ever checking what else is available
           </h2>
 
           <p className="text-sm text-slate-500 mb-4">
