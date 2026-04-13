@@ -86,7 +86,7 @@ const HeroSection = () => {
         {/* HERO */}
         <section className="text-center pt-16 pb-7">
           <h1 className="text-5xl md:text-6xl font-black leading-tight mb-6">
-            Still Paying Too Much for Car Insurance? Most Drivers Are.
+            Are You Getting the Best Rate on Car Insurance?
           </h1>
 
           <h2 className="text-2xl md:text-3xl font-extrabold text-slate-700 mb-4">
