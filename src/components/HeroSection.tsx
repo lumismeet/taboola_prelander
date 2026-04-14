@@ -29,6 +29,7 @@ const getCurrentMonth = () => {
   return new Date().toLocaleString("en-US", { month: "long" });
 };
 
+
 const HeroSection = () => {
   const { trackCtaClick } = useVisitorTracking();
   const [stateName, setStateName] = useState("");
@@ -98,20 +99,10 @@ const HeroSection = () => {
           </p>
 
           <p className="text-slate-600 max-w-4xl md:text-2xl mx-auto leading-relaxed">
-            Recent data suggests the average American family may overspend by $400+ per year on car insurance,
+            Recent data suggests the average American family may pay $400+ more per year on car insurance than necessary,
             simply because they never compare rates.
           </p>
         </section>
-
-        <div className="bg-white border-l-4 border-sky-400 shadow-sm rounded-r-xl px-6 py-4 mb-8 text-left">
-          <p className="text-slate-700 text-base leading-relaxed mb-2">
-            "My renewal jumped $47 a month. I took just about 2 minutes to compare on here and switched that same afternoon.
-            I seriously saved over $500 for the year!"
-          </p>
-          <p className="text-base font-bold text-slate-800">
-            Melissa Tanner <span className="text-slate-400 font-normal">— Phoenix, AZ</span>
-          </p>
-        </div>
 
         {/* LARGE IMAGE */}
         <img
@@ -185,7 +176,7 @@ const HeroSection = () => {
               </button>
 
               <p className="text-center text-sm text-slate-400">
-                Free • No obligation • No spam calls
+                Free • No obligation
               </p>
             </div>
           </div>
@@ -209,7 +200,7 @@ const HeroSection = () => {
           </p>
 
           <p className="text-slate-600 text-lg leading-relaxed">
-            Checking rates online is free and does not require you to make any immediate changes. It simply gives you visibility into what is available in your area so you can choose what fits your needs and your budget by clicking on <a href={getDestinationURL()} className="text-blue-600 underline">Otto Savings</a>
+            Checking rates online is free and does not require you to make any immediate changes. It simply gives you visibility into what is available in your area so you can choose what fits your needs and your budget by clicking on <a href={getDestinationURL()} className="text-blue-600 underline">Auto Savings</a>
           </p>
         </section>
 
@@ -246,10 +237,9 @@ const HeroSection = () => {
           <p className="font-black text-lg">That is all there is to it.</p>
 
           <div className="text-slate-600 text-lg space-y-1">
-            <p>No long phone calls.</p>
             <p>No pressure to switch.</p>
             <p>No obligation to purchase anything.</p>
-            <p>Just a fast and simple way to see what is currently available near you. Click here <a href={getDestinationURL()} className="text-blue-600 underline">Otto Savings</a> to get the best deals!</p>
+            <p>Just a fast and simple way to see what is currently available near you. Click here <a href={getDestinationURL()} className="text-blue-600 underline">Auto Savings</a> to get the best deals!</p>
           </div>
         </section>
 
@@ -290,43 +280,8 @@ const HeroSection = () => {
           </ul>
 
           <p className="text-slate-600 text-lg">
-            There is no obligation to switch providers. To be more informed visit <a href={getDestinationURL()} className="text-blue-600 underline">Otto Savings</a> today. You are simply gathering information so you can make a confident decision when your renewal date approaches.
+            There is no obligation to switch providers. To be more informed visit <a href={getDestinationURL()} className="text-blue-600 underline">Auto Savings</a> today. You are simply gathering information so you can make a confident decision when your renewal date approaches.
           </p>
-        </section>
-
-        {/* TESTIMONIALS */}
-        <section className="text-center mb-16">
-          <h2 className="text-3xl font-black mb-10">Testimonials</h2>
-
-          <div className="grid md:grid-cols-3 gap-6 text-left">
-            {[
-              {
-                text: "I was honestly expecting this to be one of those long, complicated forms. It took me less than 3 minutes and I ended up switching the same day. Just loved it",
-                name: "Daniel Ross",
-                location: "Austin, TX"
-              },
-              {
-                text: "My renewal jumped $47 a month. I took just about 2 minutes to compare on here and switched that same afternoon. I seriously saved over $500 for the year!",
-                name: "Melissa Tanner",
-                location: "Phoenix, AZ"
-              },
-              {
-                text: "Super simple process. No spam calls, no pressure. Just clear options and better pricing than what I was paying.",
-                name: "James Lenning",
-                location: "Orlando, FL"
-              }
-            ].map((item, i) => (
-              <div key={i} className="bg-white shadow-md p-6">
-                <p className="text-slate-600 text-base mb-4">
-                  "{item.text}"
-                </p>
-                <div className="font-bold text-base">
-                  {item.name}
-                  <span className="text-slate-500 font-normal"> - {item.location}</span>
-                </div>
-              </div>
-            ))}
-          </div>
         </section>
 
         {/* FINAL CTA */}
@@ -338,7 +293,7 @@ const HeroSection = () => {
             Check My Rate - Free, No Obligation →
           </button>
           <p className="text-slate-400 text-base mt-3">
-            Takes 90 seconds • No phone calls • No spam
+            Takes 90 seconds • No obligation
           </p>
         </div>
 
