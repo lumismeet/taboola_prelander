@@ -15,6 +15,7 @@ import AutoOptions2 from "@/components/AutoOption3";
 import AutoOptions3 from "@/components/AutoOption4";
 import AutoOptionAndres from "@/components/AutoOption_andres";
 import Andres_prelander from "@/components/AutoOption_realAndres";
+import AC_prelander from "@/components/AutoOption_AC";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,9 @@ const App = () => (
 
         {/* Real Andres prelander */}
         <Route path="/v5" element={<Andres_prelander />} />
+
+        {/* AC compliant prelander */}
+        <Route path="/v6" element={<AC_prelander />} />
 
         {/* Legal */}
         <Route path="/privacy/policy" element={<PrivacyPolicy />} />
