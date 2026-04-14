@@ -99,8 +99,7 @@ const HeroSection = () => {
           </p>
 
           <p className="text-slate-600 max-w-4xl md:text-2xl mx-auto leading-relaxed">
-            Recent data suggests the average American family may pay $400+ more per year on car insurance than necessary,
-            simply because they never compare rates.
+            Research shows drivers who compare rates regularly often find options priced much lower per year.
           </p>
         </section>
 
@@ -399,3 +398,10 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
+
+
+
+
+
+
