@@ -220,7 +220,7 @@ const HeroSection = () => {
           </p>
 
           <p className="text-slate-600 text-lg">
-            The process is designed to be simple, straightforward, and completely online. No complicated paperwork and no long conversations.
+            The process is designed to be simple and straightforward. No complicated paperwork.
           </p>
 
           <p className="text-slate-600 text-lg font-bold">
